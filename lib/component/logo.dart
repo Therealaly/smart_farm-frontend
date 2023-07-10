@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 Widget logo = Container(
-  child:
-  Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Image(
           image: AssetImage('assets/images/SMARTFARM_logo.png'),

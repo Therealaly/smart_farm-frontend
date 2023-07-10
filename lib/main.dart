@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'glassmorphism.dart';
+import 'component/glassmorphism.dart';
 import 'signIn.dart';
+import 'component/logo.dart';
 
 void main() => runApp(MaterialApp(
   theme: ThemeData(fontFamily: 'SFPro'),
@@ -15,7 +16,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(left: 50, top: 40.0, right: 50, bottom: 0),
+        padding: EdgeInsets.only(left: 30, top: 40.0, right: 30, bottom: 0),
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
@@ -30,7 +31,7 @@ class Home extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Container(
                 margin: EdgeInsets.only(bottom: 70),
-                child: continueButton,
+                child: _continueButton,
               ),
             )
           ],
@@ -44,11 +45,7 @@ Widget titleSection = Container(
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image(
-            image: AssetImage('assets/images/SMARTFARM_logo.png'),
-            height: 200,
-            width: 200,
-          ),
+          logo,
           Container(
             padding: EdgeInsets.only(top: 15),
             child: Text(
@@ -67,7 +64,7 @@ Widget titleSection = Container(
   ),
 );
 
-Widget continueButton = Material(
+Widget _continueButton = Material(
   color: Colors.transparent,
   child: InkWell(
     child: Container(

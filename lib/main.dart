@@ -2,12 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'component/glassmorphism.dart';
 import 'signIn.dart';
+import 'register.dart';
+import 'forgotPwd.dart';
 import 'component/logo.dart';
 
 void main() => runApp(MaterialApp(
   theme: ThemeData(fontFamily: 'SFPro'),
-  home: SignIn(),
-
+  home:
+    //Register(),
+    // SignIn(),
+    ForgotPwd(),
 
 ));
 

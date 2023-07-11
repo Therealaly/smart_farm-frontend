@@ -6,8 +6,8 @@ Widget logo = Container(
       children: [
         Image(
           image: AssetImage('assets/images/SMARTFARM_logo.png'),
-          height: 200,
-          width: 200,
+          height: 150,
+          width: 150,
         ),
       ]
   )

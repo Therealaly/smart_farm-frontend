@@ -4,6 +4,7 @@ import 'component/glassmorphism.dart';
 import 'signIn.dart';
 import 'register.dart';
 import 'forgotPwd.dart';
+import 'dashboard.dart';
 import 'component/logo.dart';
 
 void main() => runApp(MaterialApp(
@@ -11,7 +12,9 @@ void main() => runApp(MaterialApp(
   home:
     //Register(),
     // SignIn(),
-    ForgotPwd(),
+    //ForgotPwd(),
+    Dashboard(),
+
 
 ));
 

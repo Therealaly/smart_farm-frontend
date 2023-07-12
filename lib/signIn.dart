@@ -39,7 +39,6 @@ class SignIn extends StatelessWidget {
           ),
         ],
       )
-
     );
   }
 }
@@ -263,3 +262,4 @@ Widget _loginButton() {
       )
   );
 }
+

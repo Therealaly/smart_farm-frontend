@@ -5,15 +5,17 @@ import 'signIn.dart';
 import 'register.dart';
 import 'forgotPwd.dart';
 import 'dashboard.dart';
+import 'homepage.dart';
 import 'component/logo.dart';
 
 void main() => runApp(MaterialApp(
   theme: ThemeData(fontFamily: 'SFPro'),
   home:
     //Register(),
-    // SignIn(),
+    //SignIn(),
     //ForgotPwd(),
-    Dashboard(),
+    //Dashboard(),
+    Homepage(),
 
 
 ));

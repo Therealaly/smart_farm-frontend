@@ -245,34 +245,34 @@ Widget _confPasswordTF() {
 
 Widget _registerButton() {
   return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        child: Container(
-            child: Glassmorphism(
-                blur: 20,
-                opacity: 0.1,
-                radius: 5,
-                child: Container(
-                    height: 45,
-                    width: double.infinity,
-                    child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Register',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ]
-                    )
-                )
+    color: Colors.transparent,
+    child: InkWell(
+      child: Container(
+        child: Glassmorphism(
+          blur: 20,
+          opacity: 0.1,
+          radius: 5,
+          child: Container(
+            height: 45,
+            width: double.infinity,
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Register',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ]
             )
-        ),
-        onTap: () {},
-      )
+          )
+        )
+      ),
+      onTap: () {},
+    )
   );
 }
 

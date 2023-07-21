@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'component/glassmorphism.dart';
 import 'models/category.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
   final String dap;
   final String water;
   final String air;
@@ -40,30 +40,38 @@ class Dashboard extends StatelessWidget {
   });
 
   @override
+  DashboardState createState() => DashboardState();
+}
+
+class DashboardState extends State<Dashboard> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        toolbarHeight: 60,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(CupertinoIcons.chevron_back, color: Colors.white),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: const Text("Back"),
-      ),
-      body: Stack(
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/aurora-background.png"), fit: BoxFit.cover)
-            ),
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          toolbarHeight: 60,
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            icon: const Icon(CupertinoIcons.chevron_back, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
           ),
-          SingleChildScrollView(
-            child: Container(
+          title: const Text("Back"),
+        ),
+        body: Stack(
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/aurora-background.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Container(
               padding: const EdgeInsets.only(top: 90, left: 30, right: 30),
               color: Colors.transparent,
               child: Column(
@@ -80,7 +88,7 @@ class Dashboard extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20,),
-                  _dateCard(dap: dap),
+                  _dateCard(dap: widget.dap),
                   SizedBox(height: 20,),
                   Container(
                     height: 135,
@@ -88,27 +96,141 @@ class Dashboard extends StatelessWidget {
                       children: [
                         Expanded(
                           flex: 2,
-                          child: _temperatureCard(),
+                          child: _temperatureCard(water: widget.water, air: widget.air),
                         ),
                         SizedBox(width: 20,),
                         Expanded(
                           flex: 1,
-                          child: _humidityCard(),
+                          child: _humidityCard(humidity: widget.humidity),
                         ),
                       ],
                     ),
                   ),
                   SizedBox(height: 20,),
                   _heaterFanControl(),
+                  SizedBox(height: 20,),
+                  Container(
+                    height: 50,
+                    child: PreferredSize(
+                      preferredSize: Size.fromHeight(50),
+                      child: Container(
+                        color: Colors.transparent,
+                        child: TabBar(
+                          indicatorColor: Colors.white,
+                          tabs: [
+                            Tab(
+                              child: Text(
+                                'EC',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                'PH',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                'Humidity & Air Temp',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                'Pump',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        // first tab bar view widget
+                        Container(
+                          color: Colors.transparent,
+                          child: Center(
+                            child: Text(
+                              'Bike',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        // second tab bar view widget
+                        Container(
+                          color: Colors.transparent,
+                          child: Center(
+                            child: Text(
+                              'Car',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Container(
+                          color: Colors.transparent,
+                          child: Center(
+                            child: Text(
+                              'people',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Container(
+                          color: Colors.transparent,
+                          child: Center(
+                            child: Text(
+                              'sun',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
+
+
+
+
 
 Widget _dateCard({required String dap}) {
   return Glassmorphism(
@@ -154,7 +276,6 @@ Widget _dateCard({required String dap}) {
                 ),
               ),
               SizedBox(height: 10,),
-              /* text diganti stateful, data dari database */
               Text(
                 dap,
                 style: TextStyle(
@@ -173,7 +294,7 @@ Widget _dateCard({required String dap}) {
 
 
 
-Widget _temperatureCard() {
+Widget _temperatureCard({required String water, air}) {
   return Glassmorphism(
     blur: 20,
     opacity: 0.1,
@@ -208,7 +329,7 @@ Widget _temperatureCard() {
                   ),
                   SizedBox(height: 10,),
                   Text(
-                    '12.19°C',
+                    '$water°C',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -230,7 +351,7 @@ Widget _temperatureCard() {
                   ),
                   SizedBox(height: 10,),
                   Text(
-                    '24°C',
+                    '$air°C',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -247,7 +368,7 @@ Widget _temperatureCard() {
   );
 }
 
-Widget _humidityCard() {
+Widget _humidityCard({required String humidity}) {
   return Glassmorphism(
     blur: 20,
     opacity: 0.1,
@@ -268,7 +389,7 @@ Widget _humidityCard() {
           ),
           SizedBox(height: 10,),
           Text(
-            '50%',
+            '$humidity%',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w700,

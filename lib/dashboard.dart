@@ -231,234 +231,297 @@ class DashboardState extends State<Dashboard> {
 }
 
 Widget _dateCard({required String dap}) {
-  return Glassmorphism(
-    blur: 20,
-    opacity: 0.1,
-    radius: 8,
-    child: Container(
-      padding: const EdgeInsets.all(20),
-      width: double.infinity,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'DATETIME',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: CupertinoColors.systemGrey2,
-                ),
-              ),
-              const SizedBox(height: 10,),
-              Text(
-                DateFormat.yMMMMd().format(DateTime.now()),
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(width: 30,),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'DAP',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: CupertinoColors.systemGrey2,
-                ),
-              ),
-              SizedBox(height: 10,),
-              Text(
-                dap,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
-              )
-            ],
-          ),
-        ],
-      ),
+  return Container(
+    decoration: BoxDecoration(
+      color: Colors.transparent,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black38.withOpacity(0.1),
+          spreadRadius: 1,
+          blurRadius: 7,
+          offset: Offset(2, 5), // changes position of shadow
+        ),
+      ],
     ),
+    child: Glassmorphism(
+      blur: 10,
+      opacity: 0.07,
+      radius: 8,
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        width: double.infinity,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'DATETIME',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: CupertinoColors.systemGrey2,
+                  ),
+                ),
+                const SizedBox(height: 10,),
+                Text(
+                  DateFormat.yMMMMd().format(DateTime.now()),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(width: 30,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'DAP',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: CupertinoColors.systemGrey2,
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Text(
+                  dap,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    )
   );
 }
 
 Widget _temperatureCard({required String water, air}) {
-  return Glassmorphism(
-    blur: 20,
-    opacity: 0.1,
-    radius: 8,
-    child: Container(
-      padding: const EdgeInsets.all(20),
-      //width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Temperature",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
-            ),
-          ),
-          SizedBox(height: 15,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Water',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: CupertinoColors.systemGrey2,
-                    ),
-                  ),
-                  SizedBox(height: 10,),
-                  Text(
-                    '$water°C',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(width: 40,),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Air',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: CupertinoColors.systemGrey2,
-                    ),
-                  ),
-                  SizedBox(height: 10,),
-                  Text(
-                    '$air°C',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
-                    ),
-                  )
-                ],
-              )
-            ],
-          )
-        ],
-      ),
+  return Container(
+    decoration: BoxDecoration(
+      color: Colors.transparent,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black38.withOpacity(0.1),
+          spreadRadius: 1,
+          blurRadius: 7,
+          offset: Offset(2, 5), // changes position of shadow
+        ),
+      ],
     ),
+    child: Glassmorphism(
+      blur: 20,
+      opacity: 0.07,
+      radius: 8,
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        //width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Temperature",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(height: 15,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Water',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: CupertinoColors.systemGrey2,
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    Text(
+                      '$water°C',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24,
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(width: 40,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Air',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: CupertinoColors.systemGrey2,
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    Text(
+                      '$air°C',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24,
+                      ),
+                    )
+                  ],
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+    )
   );
 }
 
 Widget _humidityCard({required String humidity}) {
-  return Glassmorphism(
-    blur: 20,
-    opacity: 0.1,
-    radius: 8,
-    child: Container(
-      height: double.infinity,
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Humidity',
-            style: TextStyle(
-              fontSize: 16,
-              color: CupertinoColors.systemGrey2,
-            ),
-          ),
-          SizedBox(height: 10,),
-          Text(
-            '$humidity%',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-              fontSize: 24,
-            ),
-          )
-        ],
-      )
+  return Container(
+    decoration: BoxDecoration(
+      color: Colors.transparent,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black38.withOpacity(0.1),
+          spreadRadius: 1,
+          blurRadius: 7,
+          offset: Offset(2, 5), // changes position of shadow
+        ),
+      ],
     ),
+    child: Glassmorphism(
+      blur: 20,
+      opacity: 0.07,
+      radius: 8,
+      child: Container(
+        height: double.infinity,
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Humidity',
+              style: TextStyle(
+                fontSize: 16,
+                color: CupertinoColors.systemGrey2,
+              ),
+            ),
+            SizedBox(height: 10,),
+            Text(
+              '$humidity%',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 24,
+              ),
+            )
+          ],
+        )
+      ),
+    )
   );
 }
 
 Widget _heaterFanControl({required bool heater, fan}) {
-  return Glassmorphism(
-    blur: 20,
-    opacity: 0.1,
-    radius: 8,
-    child: Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            child: Row(
-              children: [
-                Icon(
-                  CupertinoIcons.thermometer_sun,
-                  color: Colors.white,
-                ),
-                SizedBox(width: 10,),
-                Text(
-                  (heater == true) ? 'On' : 'Off',
-                  style: TextStyle(
+  return Container(
+    decoration: BoxDecoration(
+      color: Colors.transparent,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black38.withOpacity(0.1),
+          spreadRadius: 1,
+          blurRadius: 7,
+          offset: Offset(2, 5), // changes position of shadow
+        ),
+      ],
+    ),
+    child: Glassmorphism(
+      blur: 20,
+      opacity: 0.07,
+      radius: 8,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              child: Row(
+                children: [
+                  Icon(
+                    CupertinoIcons.thermometer_sun,
                     color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 22,
                   ),
-                ),
-              ],
+                  SizedBox(width: 10,),
+                  Text(
+                    (heater == true) ? 'On' : 'Off',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 22,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(width: 30,),
-          Container(
-            child: Row(
-              children: [
-                Icon(
-                  CupertinoIcons.thermometer_snowflake,
-                  color: Colors.white,
-                ),
-                SizedBox(width: 10,),
-                Text(
-                  (fan == true) ? 'On' : 'Off',
-                  style: TextStyle(
+            SizedBox(width: 30,),
+            Container(
+              child: Row(
+                children: [
+                  Icon(
+                    CupertinoIcons.thermometer_snowflake,
                     color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 22,
                   ),
-                ),
-              ],
+                  SizedBox(width: 10,),
+                  Text(
+                    (fan == true) ? 'On' : 'Off',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 22,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+      )
     )
   );
 }
 
 Widget _ecTab({required bool aNutrition, bNutrition, required String ec}) {
   return Container(
+    decoration: BoxDecoration(
+      color: Colors.transparent,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black38.withOpacity(0.1),
+          spreadRadius: 1,
+          blurRadius: 7,
+          offset: Offset(3, 6), // changes position of shadow
+        ),
+      ],
+    ),
     child: Glassmorphism(
       blur: 20,
-      opacity: 0.1,
+      opacity: 0.07,
       radius: 8,
       child: Container(
         width: double.infinity,
@@ -566,9 +629,20 @@ Widget _ecTab({required bool aNutrition, bNutrition, required String ec}) {
 
 Widget _phTab({required bool phUp, phDown, required String ph}){
   return Container(
+    decoration: BoxDecoration(
+      color: Colors.transparent,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black38.withOpacity(0.1),
+          spreadRadius: 1,
+          blurRadius: 7,
+          offset: Offset(2, 5), // changes position of shadow
+        ),
+      ],
+    ),
     child: Glassmorphism(
       blur: 20,
-      opacity: 0.1,
+      opacity: 0.07,
       radius: 8,
       child: Container(
           width: double.infinity,
@@ -644,9 +718,20 @@ Widget _phTab({required bool phUp, phDown, required String ph}){
 
 Widget _pumpTab({required bool aPump, bPump, required String waterFlow}){
   return Container(
+    decoration: BoxDecoration(
+      color: Colors.transparent,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black38.withOpacity(0.1),
+          spreadRadius: 1,
+          blurRadius: 7,
+          offset: Offset(2, 5), // changes position of shadow
+        ),
+      ],
+    ),
     child: Glassmorphism(
       blur: 20,
-      opacity: 0.1,
+      opacity: 0.07,
       radius: 8,
       child: Container(
           width: double.infinity,

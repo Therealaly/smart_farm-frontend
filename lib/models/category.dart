@@ -76,7 +76,7 @@ Map<Category, List<GridViewItem>> gridViewItems = {
       heater: false,
       fan: false,
       ec: '0.48',
-      aNutrition: true,
+      aNutrition: false,
       bNutrition: true,
       ph: '1.93',
       phUp: false,

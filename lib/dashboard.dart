@@ -107,7 +107,7 @@ class DashboardState extends State<Dashboard> {
                     ),
                   ),
                   SizedBox(height: 20,),
-                  _heaterFanControl(),
+                  _heaterFanControl(heater: widget.heater, fan: widget.fan),
                   SizedBox(height: 20,),
                   Container(
                     height: 50,
@@ -129,7 +129,7 @@ class DashboardState extends State<Dashboard> {
                             ),
                             Tab(
                               child: Text(
-                                'PH',
+                                'pH',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
@@ -168,7 +168,7 @@ class DashboardState extends State<Dashboard> {
                           child: Column(
                             children: [
                               SizedBox(height: 20,),
-                              _ecTab(),
+                              _ecTab(aNutrition: widget.aNutrition, bNutrition: widget.bNutrition, ec: widget.ec),
                               SizedBox(height: 20,),
                               Container(
                                 child: Text('Placeholder'),
@@ -179,15 +179,16 @@ class DashboardState extends State<Dashboard> {
                         // second tab bar view widget
                         Container(
                           color: Colors.transparent,
-                          child: Center(
-                            child: Text(
-                              'Car',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
+                          child: Column(
+                            children: [
+                              SizedBox(height: 20,),
+                              _phTab(phUp: widget.phUp, phDown: widget.phDown, ph: widget.ph),
+                              SizedBox(height: 20,),
+                              Container(
+                                child: Text('Placeholder'),
+                              )
+                            ],
+                          )
                         ),
                         // third tab bar view widget
                         Container(
@@ -205,15 +206,16 @@ class DashboardState extends State<Dashboard> {
                         // fourth tab bar view widget
                         Container(
                           color: Colors.transparent,
-                          child: Center(
-                            child: Text(
-                              'sun',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
+                          child: Column(
+                            children: [
+                              SizedBox(height: 20,),
+                              _pumpTab(aPump: widget.aPump, bPump: widget.bPump, waterFlow: widget.waterFlow),
+                              SizedBox(height: 20,),
+                              Container(
+                                child: Text('Placeholder'),
+                              )
+                            ],
+                          )
                         ),
                       ],
                     ),
@@ -396,7 +398,7 @@ Widget _humidityCard({required String humidity}) {
   );
 }
 
-Widget _heaterFanControl() {
+Widget _heaterFanControl({required bool heater, fan}) {
   return Glassmorphism(
     blur: 20,
     opacity: 0.1,
@@ -416,7 +418,7 @@ Widget _heaterFanControl() {
                 ),
                 SizedBox(width: 10,),
                 Text(
-                  'Off',
+                  (heater == true) ? 'On' : 'Off',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
@@ -436,7 +438,7 @@ Widget _heaterFanControl() {
                 ),
                 SizedBox(width: 10,),
                 Text(
-                  'Off',
+                  (fan == true) ? 'On' : 'Off',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
@@ -452,7 +454,7 @@ Widget _heaterFanControl() {
   );
 }
 
-Widget _ecTab() {
+Widget _ecTab({required bool aNutrition, bNutrition, required String ec}) {
   return Container(
     child: Glassmorphism(
       blur: 20,
@@ -475,7 +477,7 @@ Widget _ecTab() {
                 ),
                 SizedBox(height: 10,),
                 Text(
-                  '0.48',
+                  ec,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 40,
@@ -521,7 +523,7 @@ Widget _ecTab() {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'A Nutrition',
+                  'A. Nutrition',
                   style: TextStyle(
                     color: CupertinoColors.systemGrey5,
                     fontSize: 16,
@@ -529,16 +531,16 @@ Widget _ecTab() {
                 ),
                 SizedBox(height: 10,),
                 Text(
-                  'OFF',
+                  (aNutrition == true) ? 'On' : 'Off',
                   style: TextStyle(
-                    color: Color.fromRGBO(0, 255, 10, 1),
+                    color: (aNutrition == true) ? Color.fromRGBO(0, 255, 10, 1) : Color.fromRGBO(255, 0, 0, 1),
                     fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 SizedBox(height: 20,),
                 Text(
-                  'B Nutrition',
+                  'B. Nutrition',
                   style: TextStyle(
                     color: CupertinoColors.systemGrey5,
                     fontSize: 16,
@@ -546,17 +548,173 @@ Widget _ecTab() {
                 ),
                 SizedBox(height: 10,),
                 Text(
-                  'ON',
+                  (bNutrition == true) ? 'On' : 'Off',
                   style: TextStyle(
-                    color: Color.fromRGBO(0, 255, 10, 1),
+                    color: (bNutrition == true) ? Color.fromRGBO(0, 255, 10, 1) : Color.fromRGBO(255, 0, 0, 1),
                     fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ],
             ),
           ],
         )
+      ),
+    ),
+  );
+}
+
+Widget _phTab({required bool phUp, phDown, required String ph}){
+  return Container(
+    child: Glassmorphism(
+      blur: 20,
+      opacity: 0.1,
+      radius: 8,
+      child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.only(top: 30, right: 40, bottom: 30, left: 40),
+          child: Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'PH (5.60 - 7.50)',
+                    style: TextStyle(
+                      color: CupertinoColors.systemGrey5,
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Text(
+                    ph,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 40,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(width: 50,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'pH Up',
+                    style: TextStyle(
+                      color: CupertinoColors.systemGrey5,
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Text(
+                    (phUp == true) ? 'On' : 'Off',
+                    style: TextStyle(
+                      color: (phUp == true) ? Color.fromRGBO(0, 255, 10, 1) : Color.fromRGBO(255, 0, 0, 1),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  SizedBox(height: 20,),
+                  Text(
+                    'pH Down',
+                    style: TextStyle(
+                      color: CupertinoColors.systemGrey5,
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Text(
+                    (phDown == true) ? 'On' : 'Off',
+                    style: TextStyle(
+                      color: (phDown == true) ? Color.fromRGBO(0, 255, 10, 1) : Color.fromRGBO(255, 0, 0, 1),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          )
+      ),
+    ),
+  );
+}
+
+Widget _pumpTab({required bool aPump, bPump, required String waterFlow}){
+  return Container(
+    child: Glassmorphism(
+      blur: 20,
+      opacity: 0.1,
+      radius: 8,
+      child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.only(top: 30, right: 40, bottom: 30, left: 40),
+          child: Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Waterflow',
+                    style: TextStyle(
+                      color: CupertinoColors.systemGrey5,
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Text(
+                    waterFlow,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 40,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(width: 50,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Pump 1',
+                    style: TextStyle(
+                      color: CupertinoColors.systemGrey5,
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Text(
+                    (aPump == true) ? 'On' : 'Off',
+                    style: TextStyle(
+                      color: (aPump == true) ? Color.fromRGBO(0, 255, 10, 1) : Color.fromRGBO(255, 0, 0, 1),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  SizedBox(height: 20,),
+                  Text(
+                    'Pump 2',
+                    style: TextStyle(
+                      color: CupertinoColors.systemGrey5,
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Text(
+                    (bPump == true) ? 'On' : 'Off',
+                    style: TextStyle(
+                      color: (bPump == true) ? Color.fromRGBO(0, 255, 10, 1) : Color.fromRGBO(255, 0, 0, 1),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          )
       ),
     ),
   );

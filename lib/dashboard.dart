@@ -123,7 +123,7 @@ class DashboardState extends State<Dashboard> {
                                 'EC',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                 ),
                               ),
                             ),
@@ -132,7 +132,7 @@ class DashboardState extends State<Dashboard> {
                                 'PH',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                 ),
                               ),
                             ),
@@ -141,7 +141,7 @@ class DashboardState extends State<Dashboard> {
                                 'Humidity & Air Temp',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                 ),
                               ),
                             ),
@@ -150,7 +150,7 @@ class DashboardState extends State<Dashboard> {
                                 'Pump',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                 ),
                               ),
                             ),
@@ -165,17 +165,17 @@ class DashboardState extends State<Dashboard> {
                         // first tab bar view widget
                         Container(
                           color: Colors.transparent,
-                          child: Center(
-                            child: Text(
-                              'Bike',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
+                          child: Column(
+                            children: [
+                              SizedBox(height: 20,),
+                              _ecTab(),
+                              SizedBox(height: 20,),
+                              Container(
+                                child: Text('Placeholder'),
+                              )
+                            ],
+                          )
                         ),
-
                         // second tab bar view widget
                         Container(
                           color: Colors.transparent,
@@ -189,7 +189,7 @@ class DashboardState extends State<Dashboard> {
                             ),
                           ),
                         ),
-
+                        // third tab bar view widget
                         Container(
                           color: Colors.transparent,
                           child: Center(
@@ -202,7 +202,7 @@ class DashboardState extends State<Dashboard> {
                             ),
                           ),
                         ),
-
+                        // fourth tab bar view widget
                         Container(
                           color: Colors.transparent,
                           child: Center(
@@ -227,10 +227,6 @@ class DashboardState extends State<Dashboard> {
     );
   }
 }
-
-
-
-
 
 Widget _dateCard({required String dap}) {
   return Glassmorphism(
@@ -291,8 +287,6 @@ Widget _dateCard({required String dap}) {
     ),
   );
 }
-
-
 
 Widget _temperatureCard({required String water, air}) {
   return Glassmorphism(
@@ -455,5 +449,115 @@ Widget _heaterFanControl() {
         ],
       ),
     )
+  );
+}
+
+Widget _ecTab() {
+  return Container(
+    child: Glassmorphism(
+      blur: 20,
+      opacity: 0.1,
+      radius: 8,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.only(top: 30, right: 40, bottom: 30, left: 40),
+        child: Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'EC (2.56)',
+                  style: TextStyle(
+                    color: CupertinoColors.systemGrey5,
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Text(
+                  '0.48',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 10,),
+                // Calibrate Button
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    child: Container(
+                      child: Glassmorphism(
+                        blur: 20,
+                        opacity: 0.1,
+                        radius: 5,
+                        child: Container(
+                          height: 45,
+                          width: 100,
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Calibrate',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ]
+                          )
+                        )
+                      )
+                    ),
+                    onTap: () {},
+                  )
+                )
+              ],
+            ),
+            SizedBox(width: 50,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'A Nutrition',
+                  style: TextStyle(
+                    color: CupertinoColors.systemGrey5,
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Text(
+                  'OFF',
+                  style: TextStyle(
+                    color: Color.fromRGBO(0, 255, 10, 1),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 20,),
+                Text(
+                  'B Nutrition',
+                  style: TextStyle(
+                    color: CupertinoColors.systemGrey5,
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Text(
+                  'ON',
+                  style: TextStyle(
+                    color: Color.fromRGBO(0, 255, 10, 1),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        )
+      ),
+    ),
   );
 }

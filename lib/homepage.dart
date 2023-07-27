@@ -117,6 +117,8 @@ class _Homepage extends State<Homepage> {
                                       waterFlow: item.waterFlow,
                                       aPump: item.aPump,
                                       bPump: item.bPump,
+                                      duration: item.duration,
+                                      checking: item.checking,
                                     ),
                                   ),
                                 );

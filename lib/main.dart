@@ -7,18 +7,34 @@ import 'forgotPwd.dart';
 import 'dashboard.dart';
 import 'homepage.dart';
 import 'component/logo.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() => runApp(MaterialApp(
-  theme: ThemeData(fontFamily: 'SFPro'),
-  home:
-    //Register(),
-    //SignIn(),
-    //ForgotPwd(),
-    //Dashboard(),
-    Homepage(),
+void main() {
+  runApp(MyApp());
+}
 
-
-));
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ScreenUtilInit(
+      builder: (context , child) {
+        return MaterialApp(
+          title: 'OS Smart Farm',
+          theme: ThemeData(
+              fontFamily: 'SFPro',
+          ),
+          home:
+          //Register(),
+          //SignIn(),
+          //ForgotPwd(),
+          //Dashboard(),
+          Homepage(),
+        );
+      },
+      designSize: Size(390, 844),
+    );
+  }
+}
 
 class Home extends StatelessWidget {
   @override

@@ -33,6 +33,8 @@ class GridViewItem {
   final String waterFlow;
   final bool aPump;
   final bool bPump;
+  final String duration;
+  final String checking;
 
   GridViewItem({
     required this.category,
@@ -53,6 +55,8 @@ class GridViewItem {
     required this.waterFlow,
     required this.aPump,
     required this.bPump,
+    required this.duration,
+    required this.checking,
   });
 }
 
@@ -70,7 +74,7 @@ Map<Category, List<GridViewItem>> gridViewItems = {
       title: 'Controller - 1',
       status: 'active',
       dap: '42 Days',
-      water: '-12.19',
+      water: '15',
       air: '24',
       humidity: '50',
       heater: false,
@@ -84,13 +88,15 @@ Map<Category, List<GridViewItem>> gridViewItems = {
       waterFlow: '0.00',
       aPump: true,
       bPump: false,
+      duration: '10',
+      checking: '20',
     ),
     GridViewItem(
       category: Category('Greenhouse Godean'),
       title: 'Controller - 2',
       status: 'inactive',
       dap: '21 Days',
-      water: '-12.19',
+      water: '15',
       air: '24',
       humidity: '50',
       heater: false,
@@ -104,13 +110,15 @@ Map<Category, List<GridViewItem>> gridViewItems = {
       waterFlow: '0.00',
       aPump: true,
       bPump: false,
+      duration: '10',
+      checking: '20',
     ),
     GridViewItem(
       category: Category('Greenhouse Godean'),
       title: 'Controller - 3',
       status: 'inactive',
       dap: '42 Days',
-      water: '-12.19',
+      water: '15',
       air: '24',
       humidity: '50',
       heater: false,
@@ -124,13 +132,15 @@ Map<Category, List<GridViewItem>> gridViewItems = {
       waterFlow: '0.00',
       aPump: true,
       bPump: false,
+      duration: '10',
+      checking: '20',
     ),
     GridViewItem(
       category: Category('Greenhouse Godean'),
       title: 'Controller - 4',
       status: 'active',
       dap: '42 Days',
-      water: '-12.19',
+      water: '15',
       air: '24',
       humidity: '50',
       heater: false,
@@ -144,6 +154,8 @@ Map<Category, List<GridViewItem>> gridViewItems = {
       waterFlow: '0.00',
       aPump: true,
       bPump: false,
+      duration: '10',
+      checking: '20',
     ),
   ],
   Category('Greenhouse Kaliurang'): [
@@ -152,7 +164,7 @@ Map<Category, List<GridViewItem>> gridViewItems = {
       title: 'Controller - 1',
       status: 'inactive',
       dap: '42 Days',
-      water: '-12.19',
+      water: '25',
       air: '24',
       humidity: '50',
       heater: false,
@@ -166,13 +178,15 @@ Map<Category, List<GridViewItem>> gridViewItems = {
       waterFlow: '0.00',
       aPump: true,
       bPump: false,
+      duration: '10',
+      checking: '20',
     ),
     GridViewItem(
       category: Category('Greenhouse Kaliurang'),
       title: 'Controller - 2',
       status: 'active',
       dap: '42 Days',
-      water: '-12.19',
+      water: '20',
       air: '24',
       humidity: '50',
       heater: false,
@@ -186,6 +200,8 @@ Map<Category, List<GridViewItem>> gridViewItems = {
       waterFlow: '0.00',
       aPump: true,
       bPump: false,
+      duration: '10',
+      checking: '20',
     ),
     GridViewItem(
       category: Category('Greenhouse Kaliurang'),
@@ -206,6 +222,8 @@ Map<Category, List<GridViewItem>> gridViewItems = {
       waterFlow: '0.00',
       aPump: true,
       bPump: false,
+      duration: '10',
+      checking: '20',
     ),
   ],
   Category('Greenhouse Jakal'): [
@@ -214,7 +232,7 @@ Map<Category, List<GridViewItem>> gridViewItems = {
       title: 'Controller - 1',
       status: 'inactive',
       dap: '42 Days',
-      water: '-12.19',
+      water: '-12',
       air: '24',
       humidity: '50',
       heater: false,
@@ -228,13 +246,15 @@ Map<Category, List<GridViewItem>> gridViewItems = {
       waterFlow: '0.00',
       aPump: true,
       bPump: false,
+      duration: '10',
+      checking: '20',
     ),
     GridViewItem(
       category: Category('Greenhouse Jakal'),
       title: 'Controller - 2',
       status: 'inactive',
       dap: '42 Days',
-      water: '-12.19',
+      water: '17',
       air: '24',
       humidity: '50',
       heater: false,
@@ -248,6 +268,8 @@ Map<Category, List<GridViewItem>> gridViewItems = {
       waterFlow: '0.00',
       aPump: true,
       bPump: false,
+      duration: '10',
+      checking: '20',
     ),
   ],
 };

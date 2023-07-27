@@ -5,10 +5,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../component/glassmorphism.dart';
 
-class DateCard extends StatelessWidget {
+class DateCard extends StatefulWidget {
   final String dap;
 
   const DateCard({required this.dap});
+
+  @override
+  _DateCardState createState() => _DateCardState();
+}
+
+class _DateCardState extends State<DateCard> {
+  TextEditingController dateController = TextEditingController();
+
+  @override
+  void initState(){
+    super.initState();
+    dateController.text = '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +59,7 @@ class DateCard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 5.h,),
+                  // datetime silahkan diganti sesuai kebutuhan, skrg menunjukan tgl sistem
                   Text(
                     DateFormat.yMMMMd().format(DateTime.now()),
                     style: TextStyle(
@@ -68,7 +82,7 @@ class DateCard extends StatelessWidget {
                   ),
                   SizedBox(height: 5.h,),
                   Text(
-                    dap,
+                    widget.dap,
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w700,
@@ -82,7 +96,6 @@ class DateCard extends StatelessWidget {
                   showModalBottomSheet(
                     context: context,
                     backgroundColor: Colors.transparent,
-                    barrierColor: Colors.transparent,
                     builder: (context) {
                       return ClipRRect(
                         borderRadius: BorderRadius.vertical(
@@ -105,39 +118,127 @@ class DateCard extends StatelessWidget {
                               ),
                             ),
                             child: DraggableScrollableSheet(
+                              initialChildSize: 0.6,
+                              maxChildSize: 1,
+                              minChildSize: 0.32,
                               expand: false,
                               builder: (context, scrollController) {
                                 return SingleChildScrollView(
                                   controller: scrollController,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[
-                                      SizedBox(height: 10.h),
-                                      Container(
-                                        width: 58.w,
-                                        height: 3.h,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5.r),
-                                          color: Colors.white,
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 37.w),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        SizedBox(height: 10.h),
+                                        Container(
+                                          width: 58.w,
+                                          height: 3.h,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5.r),
+                                            color: Colors.white,
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(height: 10.h),
-                                      ListTile(
-                                        leading: new Icon(Icons.photo),
-                                        title: new Text('Photo'),
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      ListTile(
-                                        leading: new Icon(Icons.music_note),
-                                        title: new Text('Music'),
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                    ],
+                                        SizedBox(height: 30.h),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'Set Date Time',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Material(
+                                              color: Colors.transparent,
+                                              child: InkWell(
+                                                child: Container(
+                                                  child: Glassmorphism(
+                                                    blur: 20,
+                                                    opacity: 0.1,
+                                                    radius: 5.r,
+                                                    child: Container(
+                                                      width: 60.w,
+                                                      height: 30.h,
+                                                      child: Row(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          Text(
+                                                            'Set',
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontSize: 12.sp,
+                                                            ),
+                                                          ),
+                                                        ]
+                                                      )
+                                                    )
+                                                  )
+                                                ),
+                                                onTap: () {},
+                                              )
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(height: 20.h,),
+                                        Container(
+                                          width: double.infinity,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Date Time',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12.sp
+                                                ),
+                                              ),
+                                              TextField(
+                                                style: TextStyle(color: Colors.white),
+                                                controller: dateController, //editing controller of this TextField
+                                                decoration: const InputDecoration(
+                                                  icon: Icon(Icons.calendar_today), //icon of text field
+                                                  labelText: "Enter Date",
+                                                  labelStyle: TextStyle(color: CupertinoColors.systemGrey2),
+                                                  iconColor: Colors.white,
+                                                  enabledBorder: UnderlineInputBorder(
+                                                    borderSide: BorderSide(color: CupertinoColors.systemGrey),
+                                                  ),
+                                                  focusedBorder: UnderlineInputBorder(
+                                                    borderSide: BorderSide(color: Colors.white),
+                                                  ),
+                                                  //label text of field
+                                                ),
+                                                readOnly: true,  // when true user cannot edit text
+                                                onTap: () async {
+                                                  DateTime? pickedDate = await showDatePicker(
+                                                      context: context,
+                                                      initialDate: DateTime.now(), //get today's date
+                                                      firstDate: DateTime.now(), //DateTime(2000), -> to specify fixed date. DateTime.now() -> not to allow to choose before today.
+                                                      lastDate: DateTime(2101),
+                                                  );
+                                                  if(pickedDate != null ){
+                                                    print(pickedDate);  //get the picked date in the format
+                                                    String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate); // format date in required form here we use dd-MM-yyyy that means time is removed
+                                                    print(formattedDate); //formatted date output using intl packag
+                                                    //You can format date as per your need
+                                                    setState(() {
+                                                      dateController.text = formattedDate; //set foratted date to TextField value.
+                                                    });
+                                                  }else{
+                                                    print("Date is not selected");
+                                                  }
+                                                }
+                                              )
+                                            ],
+
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 );
                               },

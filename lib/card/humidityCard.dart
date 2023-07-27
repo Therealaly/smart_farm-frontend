@@ -1,19 +1,24 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-
 import '../component/glassmorphism.dart';
+import 'package:smart_farm/component/numberStepper.dart';
 
-class HumidityCard extends StatelessWidget {
+class HumidityCard extends StatefulWidget {
   final String humidity;
 
   const HumidityCard({required this.humidity});
 
   @override
+  _HumidityCardState createState() => _HumidityCardState();
+}
+
+class _HumidityCardState extends State<HumidityCard> {
+  @override
   Widget build(BuildContext context) {
+    var humidVal = 0; //sesuaikan dgn kebutuhan
     return Container(
       decoration: BoxDecoration(
         color: Colors.transparent,
@@ -53,7 +58,6 @@ class HumidityCard extends StatelessWidget {
                       showModalBottomSheet(
                         context: context,
                         backgroundColor: Colors.transparent,
-                        barrierColor: Colors.transparent,
                         builder: (context) {
                           return ClipRRect(
                             borderRadius: BorderRadius.vertical(
@@ -76,39 +80,109 @@ class HumidityCard extends StatelessWidget {
                                   ),
                                 ),
                                 child: DraggableScrollableSheet(
+                                  initialChildSize: 0.6,
+                                  maxChildSize: 1,
+                                  minChildSize: 0.32,
                                   expand: false,
                                   builder: (context, scrollController) {
                                     return SingleChildScrollView(
                                       controller: scrollController,
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          SizedBox(height: 10.h),
-                                          Container(
-                                            width: 58.w,
-                                            height: 3.h,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(5.r),
-                                              color: Colors.white,
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: 37.w),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            SizedBox(height: 10.h),
+                                            Container(
+                                              width: 58.w,
+                                              height: 3.h,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5.r),
+                                                color: Colors.white,
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(height: 10.h),
-                                          ListTile(
-                                            leading: new Icon(Icons.photo),
-                                            title: new Text('Photo'),
-                                            onTap: () {
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                          ListTile(
-                                            leading: new Icon(Icons.music_note),
-                                            title: new Text('Music'),
-                                            onTap: () {
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                        ],
+                                            SizedBox(height: 30.h),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Set Humidity',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14.sp,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: InkWell(
+                                                    child: Container(
+                                                      child: Glassmorphism(
+                                                        blur: 20,
+                                                        opacity: 0.1,
+                                                        radius: 5.r,
+                                                        child: Container(
+                                                          width: 60.w,
+                                                          height: 30.h,
+                                                          child: Row(
+                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                            children: [
+                                                              Text(
+                                                                'Set',
+                                                                style: TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontSize: 12.sp,
+                                                                ),
+                                                              ),
+                                                            ]
+                                                          )
+                                                        )
+                                                      )
+                                                    ),
+                                                    onTap: () {},
+                                                  )
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(height: 20.h,),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Preferred Humidity',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 12.sp
+                                                  ),
+                                                ),
+                                                Container(
+                                                  child: Glassmorphism(
+                                                    blur: 20,
+                                                    opacity: 0.1,
+                                                    radius: 5.r,
+                                                    child: Container(
+                                                      width: 117.w,
+                                                      height: 30.h,
+                                                      child: NumberStepper(
+                                                        initialValue: humidVal, // bisa disesuaikan
+                                                        min: 10, // min stepper
+                                                        max: 90, // max stepper
+                                                        step: 5, // jumlah kelipatan tiap step
+                                                        onChanged: (value){
+                                                          // bisa disesuaikan utk menampilkan data
+                                                          setState(() {
+                                                            humidVal = value;
+                                                          });
+                                                        },
+                                                      ),
+                                                    )
+                                                  )
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     );
                                   },
@@ -136,7 +210,7 @@ class HumidityCard extends StatelessWidget {
                 ),
               ),
               Text(
-                '$humidity%',
+                '${widget.humidity}%',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,

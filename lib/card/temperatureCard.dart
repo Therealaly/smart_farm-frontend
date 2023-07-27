@@ -113,6 +113,7 @@ class _TemperatureCardState extends State<TemperatureCard> {
                                                   style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 14.sp,
+                                                    fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
                                                 Material(

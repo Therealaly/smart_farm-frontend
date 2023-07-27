@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'component/logo.dart';
 import 'component/glassmorphism.dart';
 import 'package:smart_farm/models/category.dart';
 import 'dashboard.dart';
+
 
 class Homepage extends StatefulWidget {
   @override
@@ -26,7 +28,7 @@ class _Homepage extends State<Homepage> {
           ),
           Positioned.fill(
             child: Container(
-              padding: EdgeInsets.only(left: 30, right: 30, bottom: 30),
+              padding: EdgeInsets.symmetric(horizontal: 30.w),
               color: Colors.transparent,
               child: Column(
                 children: [
@@ -40,6 +42,7 @@ class _Homepage extends State<Homepage> {
                     ],
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         'All Controllers',
@@ -49,134 +52,268 @@ class _Homepage extends State<Homepage> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          DropdownButton<Category>(
-                            value: selectedCategory,
-                            onChanged: (Category? newValue) {
-                              setState(() {
-                                selectedCategory = newValue;
-                                print("Selected Category: $selectedCategory"); //development
-                              });
-                            },
-                            items: categories.map((Category category) {
-                              return DropdownMenuItem<Category>(
-                                value: category,
-                                child:
-                                Text(
-                                  category.name,
-                                  style: TextStyle(
-                                    color: CupertinoColors.systemGrey2,
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                        ],
+                      DropdownButton<Category>(
+                        dropdownColor: Colors.blueGrey[800],
+                        style: TextStyle(color: Colors.white),
+                        value: selectedCategory,
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.white, // <-- SEE HERE
+                        ),
+                        underline: Container(
+                          height: 1,
+                          color: Colors.white, //<-- SEE HERE
+                        ),
+                        onChanged: (Category? newValue) {
+                          setState(() {
+                            selectedCategory = newValue;
+                            //print("Selected Category: $selectedCategory"); //development
+                          });
+                        },
+                        items: categories.map((Category category) {
+                          return DropdownMenuItem<Category>(
+                            value: category,
+                            child:
+                            Text(
+                              category.name,
+                            ),
+                          );
+                        }).toList(),
                       )
                     ],
                   ),
+                  SizedBox(height: 10.h,),
                   Expanded(
-                    child: GridView.builder(
+                    child: ListView.builder(
                       shrinkWrap: true,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 25,
-                        crossAxisSpacing: 25,
-                        childAspectRatio: (1 / 0.8),
-                      ),
+                      scrollDirection: Axis.vertical,
                       itemCount: gridViewItems[selectedCategory]?.length ?? 0,
                       itemBuilder: (context, index) {
-                        print("GridView Item: $index"); //development
                         GridViewItem? item = gridViewItems[selectedCategory]?[index] as GridViewItem?;
-                        return item != null
-                          ? GridTile(
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {
-                                // Navigate to the Dashboard page and pass the selected GridViewItem
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Dashboard(
-                                      // Pass the selected GridViewItem details to the Dashboard
-                                      dap: item.dap,
-                                      water: item.water,
-                                      air: item.air,
-                                      humidity: item.humidity,
-                                      heater: item.heater,
-                                      fan: item.fan,
-                                      ec: item.ec,
-                                      aNutrition: item.aNutrition,
-                                      bNutrition: item.bNutrition,
-                                      ph: item.ph,
-                                      phUp: item.phUp,
-                                      phDown: item.phDown,
-                                      waterFlow: item.waterFlow,
-                                      aPump: item.aPump,
-                                      bPump: item.bPump,
-                                      duration: item.duration,
-                                      checking: item.checking,
-                                    ),
+                        return item != null ? Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          child: ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Dashboard(
+                                    dap: item.dap,
+                                    water: item.water,
+                                    air: item.air,
+                                    humidity: item.humidity,
+                                    heater: item.heater,
+                                    fan: item.fan,
+                                    ec: item.ec,
+                                    aNutrition: item.aNutrition,
+                                    bNutrition: item.bNutrition,
+                                    ph: item.ph,
+                                    phUp: item.phUp,
+                                    phDown: item.phDown,
+                                    waterFlow: item.waterFlow,
+                                    aPump: item.aPump,
+                                    bPump: item.bPump,
+                                    duration: item.duration,
+                                    checking: item.checking,
                                   ),
-                                );
-                              },
-                              child: Glassmorphism(
-                                blur: 20,
-                                opacity: 0.1,
-                                radius: 8,
-                                child: Container(
-                                  padding: const EdgeInsets.all(20),
-                                  //width: double.infinity,
-                                  //height: 50,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Icon(
-                                        CupertinoIcons.game_controller_solid,
-                                        color: Colors.white,
-                                        size: 50,
-                                      ),
-                                      SizedBox(height: 10,),
-                                      Text(
-                                        item.title,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      SizedBox(height: 5,),
-                                      Container(
-                                        child: Row(
+                                ),
+                              );
+                            },
+                            title: Glassmorphism(
+                              blur: 20,
+                              opacity: 0.1,
+                              radius: 8,
+                              child: Container(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              'status: ${item.status}',
+                                              item.title,
                                               style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 14,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w700,
                                               ),
                                             ),
-                                            SizedBox(width: 5,),
-                                            Icon(
-                                              size: 14,
-                                              CupertinoIcons.circle_fill,
-                                              color: (item.status == 'active') ? Color.fromRGBO(0, 255, 10, 1) : Color.fromRGBO(255, 0, 0, 1),
+                                            SizedBox(height: 2.h,),
+                                            Row(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'status: ${item.status}',
+                                                  style: TextStyle(
+                                                    color: CupertinoColors.systemGrey2,
+                                                    fontSize: 8.sp,
+                                                  ),
+                                                ),
+                                                SizedBox(width: 5,),
+                                                Icon(
+                                                  size: 8.w,
+                                                  CupertinoIcons.circle_fill,
+                                                  color: (item.status == 'active') ? Color.fromRGBO(0, 255, 10, 1) : Color.fromRGBO(255, 0, 0, 1),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'DAP',
+                                              style: TextStyle(
+                                                color: CupertinoColors.systemGrey2,
+                                                fontSize: 8.sp,
+                                              ),
+                                            ),
+                                            Text(
+                                              '${item.dap}',
+                                              style: TextStyle(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10.h,),
+                                    Container(
+                                      width: double.infinity,
+                                      height: 1.h,
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(height: 10.h,),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'EC (2.56)',
+                                              style: TextStyle(
+                                                fontSize: 8.sp,
+                                                color: CupertinoColors.systemGrey2,
+                                              ),
+                                            ),
+                                            Text(
+                                              item.ec,
+                                              style: TextStyle(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(height: 20.h,),
+                                            Text(
+                                              'Water Temp',
+                                              style: TextStyle(
+                                                fontSize: 8.sp,
+                                                color: CupertinoColors.systemGrey2,
+                                              ),
+                                            ),
+                                            Text(
+                                              '${item.water}°C',
+                                              style: TextStyle(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'pH (5.6 - 7.5)',
+                                              style: TextStyle(
+                                                fontSize: 8.sp,
+                                                color: CupertinoColors.systemGrey2,
+                                              ),
+                                            ),
+                                            Text(
+                                              item.ph,
+                                              style: TextStyle(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(height: 20.h,),
+                                            Text(
+                                              'Air Temp',
+                                              style: TextStyle(
+                                                fontSize: 8.sp,
+                                                color: CupertinoColors.systemGrey2,
+                                              ),
+                                            ),
+                                            Text(
+                                              '${item.air}°C',
+                                              style: TextStyle(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ],
-                                        ) ,
-                                      )
-                                    ],
-                                  ),
-                                )
+                                        ),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Humidty',
+                                              style: TextStyle(
+                                                fontSize: 8.sp,
+                                                color: CupertinoColors.systemGrey2,
+                                              ),
+                                            ),
+                                            Text(
+                                              '${item.humidity}%',
+                                              style: TextStyle(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(height: 20.h,),
+                                            Text(
+                                              'Pump 1',
+                                              style: TextStyle(
+                                                fontSize: 8.sp,
+                                                color: CupertinoColors.systemGrey2,
+                                              ),
+                                            ),
+                                            Text(
+                                              (item.aPump == true) ? 'On' : 'Off',
+                                              style: TextStyle(
+                                                color: (item.aPump == true)
+                                                    ? Color.fromRGBO(0, 255, 10, 1)
+                                                    : Color.fromRGBO(255, 0, 0, 1),
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            )
-                          )
-                        )
-                            : Container();
-                      }
+                            ),
+                          ),
+                        ) : Container();
+                      },
                     ),
                   )
                 ],

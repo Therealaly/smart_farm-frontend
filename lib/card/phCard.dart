@@ -171,6 +171,7 @@ class _PhCardState extends State<PhCard> {
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14.sp,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                             ),
                                             Material(
@@ -182,10 +183,8 @@ class _PhCardState extends State<PhCard> {
                                                     opacity: 0.1,
                                                     radius: 5.r,
                                                     child: Container(
-                                                      padding: EdgeInsets.only(top: 10.h,
-                                                        bottom: 10.h,
-                                                        left: 20.w,
-                                                        right: 20.w),
+                                                        width: 60.w,
+                                                        height: 30.h,
                                                       child: Row(
                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
@@ -331,7 +330,7 @@ class _PhCardState extends State<PhCard> {
                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
                                                           Text(
-                                                            'Calibrate pH 4',
+                                                            'Calibrate pH 7',
                                                             style: TextStyle(
                                                               color: Colors.white,
                                                               fontSize: 12.sp,

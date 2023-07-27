@@ -181,505 +181,502 @@ class _EcCardState extends State<EcCard> {
                               minChildSize: 0.32,
                               expand: false,
                               builder: (context, scrollController) {
-                                return CustomScrollView(
-                                  controller: scrollController,
-                                  slivers: [
-                                    SliverAppBar(
-                                      backgroundColor: Colors.transparent,
-                                      elevation: 0.0,
-                                      expandedHeight: 10.h, // Adjust the height as needed
-                                      automaticallyImplyLeading: false,
-                                      pinned: true,
-                                      flexibleSpace: Column(
-                                        children: [
-                                          SizedBox(height: 10.h),
-                                          Container(
-                                            width: 58.w,
-                                            height: 3.h,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(5.r),
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      )
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(height: 10.h),
+                                    Container(
+                                      width: 58.w,
+                                      height: 3.h,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5.r),
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                    SliverToBoxAdapter(
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 37.w),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            //SizedBox(height: 30.h),
-                                            Row(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Set All DAP',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 22.h,),
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  child: Glassmorphism(
-                                                    blur: 20,
-                                                    opacity: 0.1,
-                                                    radius: 5.r,
-                                                    child: Container(
-                                                      width: 117.w,
-                                                      height: 30.h,
-                                                      child: NumberStepper(
-                                                        initialValue: allDap, // bisa disesuaikan
-                                                        min: 0, // min stepper
-                                                        max: 60, // max stepper
-                                                        step: 1, // jumlah kelipatan tiap step
-                                                        onChanged: (value){
-                                                          // bisa disesuaikan utk menampilkan data
-                                                          setState(() {
-                                                            allDap = value;
-                                                          });
-                                                        },
+                                    SizedBox(height: 10.h),
+                                    Expanded(
+                                      child: SingleChildScrollView(
+                                        controller: scrollController,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(horizontal: 37.w),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              SizedBox(height: 20.h),
+                                              Container(
+                                                width: double.infinity,
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Set All DAP',
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14.sp,
+                                                        fontWeight: FontWeight.w600,
                                                       ),
-                                                    )
-                                                  )
-                                                ),
-                                                SizedBox(width: 7.w,),
-                                                Material(
-                                                  color: Colors.transparent,
-                                                  child: InkWell(
-                                                    child: Container(
-                                                      child: Glassmorphism(
-                                                        blur: 20,
-                                                        opacity: 0.1,
-                                                        radius: 5.r,
-                                                        child: Container(
-                                                          width: 60.w,
-                                                          height: 30.h,
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                            children: [
-                                                              Text(
-                                                                'Set',
-                                                                style: TextStyle(
-                                                                  color: Colors.white,
-                                                                  fontSize: 12.sp,
-                                                                ),
-                                                              ),
-                                                            ]
-                                                          )
-                                                        )
-                                                      )
                                                     ),
-                                                    onTap: () {},
-                                                  )
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(height: 35.h,),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'Set Single DAP',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
+                                                  ],
                                                 ),
-                                                Material(
-                                                  color: Colors.transparent,
-                                                  child: InkWell(
-                                                    child: Container(
-                                                      child: Glassmorphism(
-                                                        blur: 20,
-                                                        opacity: 0.1,
-                                                        radius: 5.r,
-                                                        child: Container(
-                                                          width: 60.w,
-                                                          height: 30.h,
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                            children: [
-                                                              Text(
-                                                                'Set',
-                                                                style: TextStyle(
-                                                                  color: Colors.white,
-                                                                  fontSize: 12.sp,
-                                                                ),
-                                                              ),
-                                                            ]
-                                                          )
-                                                        )
-                                                      )
-                                                    ),
-                                                    onTap: () {},
-                                                  )
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(height: 15.h,),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'EC Value DAP 1',
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12.sp
-                                                  ),
-                                                ),
-                                                Container(
-                                                  child: Glassmorphism(
-                                                    blur: 20,
-                                                    opacity: 0.1,
-                                                    radius: 5.r,
-                                                    child: Container(
-                                                      width: 117.w,
-                                                      height: 30.h,
-                                                      child: NumberStepper(
-                                                        initialValue: dapV1, // bisa disesuaikan
-                                                        min: 0, // min stepper
-                                                        max: 60, // max stepper
-                                                        step: 1, // jumlah kelipatan tiap step
-                                                        onChanged: (value){
-                                                          // bisa disesuaikan utk menampilkan data
-                                                          setState(() {
-                                                            dapV1 = value;
-                                                          });
-                                                        },
-                                                      ),
-                                                    )
-                                                  )
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 10.h,),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'EC Value DAP 2',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 12.sp
-                                                  ),
-                                                ),
-                                                Container(
-                                                  child: Glassmorphism(
-                                                    blur: 20,
-                                                    opacity: 0.1,
-                                                    radius: 5.r,
-                                                    child: Container(
-                                                      width: 117.w,
-                                                      height: 30.h,
-                                                      child: NumberStepper(
-                                                        initialValue: dapV2, // bisa disesuaikan
-                                                        min: 0, // min stepper
-                                                        max: 60, // max stepper
-                                                        step: 1, // jumlah kelipatan tiap step
-                                                        onChanged: (value){
-                                                          // bisa disesuaikan utk menampilkan data
-                                                          setState(() {
-                                                            dapV2 = value;
-                                                          });
-                                                        },
-                                                      ),
-                                                    )
-                                                  )
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 10.h,),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'EC Value DAP 3',
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12.sp
-                                                  ),
-                                                ),
-                                                Container(
-                                                  child: Glassmorphism(
-                                                    blur: 20,
-                                                    opacity: 0.1,
-                                                    radius: 5.r,
-                                                    child: Container(
-                                                      width: 117.w,
-                                                      height: 30.h,
-                                                      child: NumberStepper(
-                                                        initialValue: dapV3, // bisa disesuaikan
-                                                        min: 0, // min stepper
-                                                        max: 60, // max stepper
-                                                        step: 1, // jumlah kelipatan tiap step
-                                                        onChanged: (value){
-                                                          // bisa disesuaikan utk menampilkan data
-                                                          setState(() {
-                                                            dapV3 = value;
-                                                          });
-                                                        },
-                                                      ),
-                                                    )
-                                                  )
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 10.h,),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'EC Value DAP 4',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 12.sp
-                                                  ),
-                                                ),
-                                                Container(
-                                                  child: Glassmorphism(
-                                                    blur: 20,
-                                                    opacity: 0.1,
-                                                    radius: 5.r,
-                                                    child: Container(
-                                                      width: 117.w,
-                                                      height: 30.h,
-                                                      child: NumberStepper(
-                                                        initialValue: dapV4, // bisa disesuaikan
-                                                        min: 0, // min stepper
-                                                        max: 60, // max stepper
-                                                        step: 1, // jumlah kelipatan tiap step
-                                                        onChanged: (value){
-                                                          // bisa disesuaikan utk menampilkan data
-                                                          setState(() {
-                                                            dapV4 = value;
-                                                          });
-                                                        },
-                                                      ),
-                                                    )
-                                                  )
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 10.h,),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'EC Value DAP 5',
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12.sp
-                                                  ),
-                                                ),
-                                                Container(
-                                                  child: Glassmorphism(
-                                                    blur: 20,
-                                                    opacity: 0.1,
-                                                    radius: 5.r,
-                                                    child: Container(
-                                                      width: 117.w,
-                                                      height: 30.h,
-                                                      child: NumberStepper(
-                                                        initialValue: dapV5, // bisa disesuaikan
-                                                        min: 0, // min stepper
-                                                        max: 60, // max stepper
-                                                        step: 1, // jumlah kelipatan tiap step
-                                                        onChanged: (value){
-                                                          // bisa disesuaikan utk menampilkan data
-                                                          setState(() {
-                                                            dapV5 = value;
-                                                          });
-                                                        },
-                                                      ),
-                                                    )
-                                                  )
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 10.h,),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'EC Value DAP 6',
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12.sp
-                                                  ),
-                                                ),
-                                                Container(
+                                              ),
+                                              SizedBox(height: 22.h,),
+                                              Row(
+                                                children: [
+                                                  Container(
                                                     child: Glassmorphism(
-                                                        blur: 20,
-                                                        opacity: 0.1,
-                                                        radius: 5.r,
-                                                        child: Container(
-                                                          width: 117.w,
-                                                          height: 30.h,
-                                                          child: NumberStepper(
-                                                            initialValue: dapV6, // bisa disesuaikan
-                                                            min: 0, // min stepper
-                                                            max: 60, // max stepper
-                                                            step: 1, // jumlah kelipatan tiap step
-                                                            onChanged: (value){
-                                                              // bisa disesuaikan utk menampilkan data
-                                                              setState(() {
-                                                                dapV6 = value;
-                                                              });
-                                                            },
-                                                          ),
-                                                        )
+                                                      blur: 20,
+                                                      opacity: 0.1,
+                                                      radius: 5.r,
+                                                      child: Container(
+                                                        width: 117.w,
+                                                        height: 30.h,
+                                                        child: NumberStepper(
+                                                          initialValue: allDap, // bisa disesuaikan
+                                                          min: 0, // min stepper
+                                                          max: 60, // max stepper
+                                                          step: 1, // jumlah kelipatan tiap step
+                                                          onChanged: (value){
+                                                            // bisa disesuaikan utk menampilkan data
+                                                            setState(() {
+                                                              allDap = value;
+                                                            });
+                                                          },
+                                                        ),
+                                                      )
                                                     )
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 10.h,),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'EC Value DAP 7',
-                                                  style: TextStyle(
+                                                  ),
+                                                  SizedBox(width: 7.w,),
+                                                  Material(
+                                                    color: Colors.transparent,
+                                                    child: InkWell(
+                                                      child: Container(
+                                                        child: Glassmorphism(
+                                                          blur: 20,
+                                                          opacity: 0.1,
+                                                          radius: 5.r,
+                                                          child: Container(
+                                                            width: 60.w,
+                                                            height: 30.h,
+                                                            child: Row(
+                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                              children: [
+                                                                Text(
+                                                                  'Set',
+                                                                  style: TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontSize: 12.sp,
+                                                                  ),
+                                                                ),
+                                                              ]
+                                                            )
+                                                          )
+                                                        )
+                                                      ),
+                                                      onTap: () {},
+                                                    )
+                                                  )
+                                                ],
+                                              ),
+                                              SizedBox(height: 35.h,),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'Set Single DAP',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 14.sp,
+                                                      fontWeight: FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                  Material(
+                                                    color: Colors.transparent,
+                                                    child: InkWell(
+                                                      child: Container(
+                                                        child: Glassmorphism(
+                                                          blur: 20,
+                                                          opacity: 0.1,
+                                                          radius: 5.r,
+                                                          child: Container(
+                                                            width: 60.w,
+                                                            height: 30.h,
+                                                            child: Row(
+                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                              children: [
+                                                                Text(
+                                                                  'Set',
+                                                                  style: TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontSize: 12.sp,
+                                                                  ),
+                                                                ),
+                                                              ]
+                                                            )
+                                                          )
+                                                        )
+                                                      ),
+                                                      onTap: () {},
+                                                    )
+                                                  )
+                                                ],
+                                              ),
+                                              SizedBox(height: 15.h,),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'EC Value DAP 1',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12.sp
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    child: Glassmorphism(
+                                                      blur: 20,
+                                                      opacity: 0.1,
+                                                      radius: 5.r,
+                                                      child: Container(
+                                                        width: 117.w,
+                                                        height: 30.h,
+                                                        child: NumberStepper(
+                                                          initialValue: dapV1, // bisa disesuaikan
+                                                          min: 0, // min stepper
+                                                          max: 60, // max stepper
+                                                          step: 1, // jumlah kelipatan tiap step
+                                                          onChanged: (value){
+                                                            // bisa disesuaikan utk menampilkan data
+                                                            setState(() {
+                                                              dapV1 = value;
+                                                            });
+                                                          },
+                                                        ),
+                                                      )
+                                                    )
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 10.h,),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'EC Value DAP 2',
+                                                    style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 12.sp
+                                                    ),
                                                   ),
-                                                ),
-                                                Container(
+                                                  Container(
                                                     child: Glassmorphism(
-                                                        blur: 20,
-                                                        opacity: 0.1,
-                                                        radius: 5.r,
-                                                        child: Container(
-                                                          width: 117.w,
-                                                          height: 30.h,
-                                                          child: NumberStepper(
-                                                            initialValue: dapV7, // bisa disesuaikan
-                                                            min: 0, // min stepper
-                                                            max: 60, // max stepper
-                                                            step: 1, // jumlah kelipatan tiap step
-                                                            onChanged: (value){
-                                                              // bisa disesuaikan utk menampilkan data
-                                                              setState(() {
-                                                                dapV7 = value;
-                                                              });
-                                                            },
-                                                          ),
-                                                        )
+                                                      blur: 20,
+                                                      opacity: 0.1,
+                                                      radius: 5.r,
+                                                      child: Container(
+                                                        width: 117.w,
+                                                        height: 30.h,
+                                                        child: NumberStepper(
+                                                          initialValue: dapV2, // bisa disesuaikan
+                                                          min: 0, // min stepper
+                                                          max: 60, // max stepper
+                                                          step: 1, // jumlah kelipatan tiap step
+                                                          onChanged: (value){
+                                                            // bisa disesuaikan utk menampilkan data
+                                                            setState(() {
+                                                              dapV2 = value;
+                                                            });
+                                                          },
+                                                        ),
+                                                      )
                                                     )
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 20.h,),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                Material(
-                                                  color: Colors.transparent,
-                                                  child: InkWell(
-                                                    child: Container(
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 10.h,),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'EC Value DAP 3',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12.sp
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    child: Glassmorphism(
+                                                      blur: 20,
+                                                      opacity: 0.1,
+                                                      radius: 5.r,
+                                                      child: Container(
+                                                        width: 117.w,
+                                                        height: 30.h,
+                                                        child: NumberStepper(
+                                                          initialValue: dapV3, // bisa disesuaikan
+                                                          min: 0, // min stepper
+                                                          max: 60, // max stepper
+                                                          step: 1, // jumlah kelipatan tiap step
+                                                          onChanged: (value){
+                                                            // bisa disesuaikan utk menampilkan data
+                                                            setState(() {
+                                                              dapV3 = value;
+                                                            });
+                                                          },
+                                                        ),
+                                                      )
+                                                    )
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 10.h,),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'EC Value DAP 4',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 12.sp
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    child: Glassmorphism(
+                                                      blur: 20,
+                                                      opacity: 0.1,
+                                                      radius: 5.r,
+                                                      child: Container(
+                                                        width: 117.w,
+                                                        height: 30.h,
+                                                        child: NumberStepper(
+                                                          initialValue: dapV4, // bisa disesuaikan
+                                                          min: 0, // min stepper
+                                                          max: 60, // max stepper
+                                                          step: 1, // jumlah kelipatan tiap step
+                                                          onChanged: (value){
+                                                            // bisa disesuaikan utk menampilkan data
+                                                            setState(() {
+                                                              dapV4 = value;
+                                                            });
+                                                          },
+                                                        ),
+                                                      )
+                                                    )
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 10.h,),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'EC Value DAP 5',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12.sp
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    child: Glassmorphism(
+                                                      blur: 20,
+                                                      opacity: 0.1,
+                                                      radius: 5.r,
+                                                      child: Container(
+                                                        width: 117.w,
+                                                        height: 30.h,
+                                                        child: NumberStepper(
+                                                          initialValue: dapV5, // bisa disesuaikan
+                                                          min: 0, // min stepper
+                                                          max: 60, // max stepper
+                                                          step: 1, // jumlah kelipatan tiap step
+                                                          onChanged: (value){
+                                                            // bisa disesuaikan utk menampilkan data
+                                                            setState(() {
+                                                              dapV5 = value;
+                                                            });
+                                                          },
+                                                        ),
+                                                      )
+                                                    )
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 10.h,),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'EC Value DAP 6',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12.sp
+                                                    ),
+                                                  ),
+                                                  Container(
                                                       child: Glassmorphism(
-                                                        blur: 20,
-                                                        opacity: 0.1,
-                                                        radius: 5.r,
-                                                        child: Container(
-                                                          padding: EdgeInsets.only(top: 10.h,
-                                                            bottom: 10.h,
-                                                            left: 12.w,
-                                                            right: 12.w),
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                            children: [
-                                                              Text(
-                                                                'Add DAP',
-                                                                style: TextStyle(
-                                                                  color: Colors.white,
-                                                                  fontSize: 12.sp,
+                                                          blur: 20,
+                                                          opacity: 0.1,
+                                                          radius: 5.r,
+                                                          child: Container(
+                                                            width: 117.w,
+                                                            height: 30.h,
+                                                            child: NumberStepper(
+                                                              initialValue: dapV6, // bisa disesuaikan
+                                                              min: 0, // min stepper
+                                                              max: 60, // max stepper
+                                                              step: 1, // jumlah kelipatan tiap step
+                                                              onChanged: (value){
+                                                                // bisa disesuaikan utk menampilkan data
+                                                                setState(() {
+                                                                  dapV6 = value;
+                                                                });
+                                                              },
+                                                            ),
+                                                          )
+                                                      )
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 10.h,),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'EC Value DAP 7',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12.sp
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                      child: Glassmorphism(
+                                                          blur: 20,
+                                                          opacity: 0.1,
+                                                          radius: 5.r,
+                                                          child: Container(
+                                                            width: 117.w,
+                                                            height: 30.h,
+                                                            child: NumberStepper(
+                                                              initialValue: dapV7, // bisa disesuaikan
+                                                              min: 0, // min stepper
+                                                              max: 60, // max stepper
+                                                              step: 1, // jumlah kelipatan tiap step
+                                                              onChanged: (value){
+                                                                // bisa disesuaikan utk menampilkan data
+                                                                setState(() {
+                                                                  dapV7 = value;
+                                                                });
+                                                              },
+                                                            ),
+                                                          )
+                                                      )
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 20.h,),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Material(
+                                                    color: Colors.transparent,
+                                                    child: InkWell(
+                                                      child: Container(
+                                                        child: Glassmorphism(
+                                                          blur: 20,
+                                                          opacity: 0.1,
+                                                          radius: 5.r,
+                                                          child: Container(
+                                                            padding: EdgeInsets.only(top: 10.h,
+                                                              bottom: 10.h,
+                                                              left: 12.w,
+                                                              right: 12.w),
+                                                            child: Row(
+                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                              children: [
+                                                                Text(
+                                                                  'Add DAP',
+                                                                  style: TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontSize: 12.sp,
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                            ]
+                                                              ]
+                                                            )
                                                           )
                                                         )
-                                                      )
-                                                    ),
-                                                    onTap: () {},
-                                                  )
-                                                ),
-                                                SizedBox(width: 20.w,),
-                                                Material(
-                                                  color: Colors.transparent,
-                                                  child: InkWell(
-                                                    child: Container(
-                                                      child: Glassmorphism(
-                                                        blur: 20,
-                                                        opacity: 0.1,
-                                                        radius: 5.r,
-                                                        child: Container(
-                                                          padding: EdgeInsets.only(top: 10.h,
-                                                            bottom: 10.h,
-                                                            left: 12.w,
-                                                            right: 12.w),
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                            children: [
-                                                              Text(
-                                                                'Delete DAP',
-                                                                style: TextStyle(
-                                                                  color: Colors.white,
-                                                                  fontSize: 12.sp,
+                                                      ),
+                                                      onTap: () {},
+                                                    )
+                                                  ),
+                                                  SizedBox(width: 20.w,),
+                                                  Material(
+                                                    color: Colors.transparent,
+                                                    child: InkWell(
+                                                      child: Container(
+                                                        child: Glassmorphism(
+                                                          blur: 20,
+                                                          opacity: 0.1,
+                                                          radius: 5.r,
+                                                          child: Container(
+                                                            padding: EdgeInsets.only(top: 10.h,
+                                                              bottom: 10.h,
+                                                              left: 12.w,
+                                                              right: 12.w),
+                                                            child: Row(
+                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                              children: [
+                                                                Text(
+                                                                  'Delete DAP',
+                                                                  style: TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontSize: 12.sp,
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                            ]
+                                                              ]
+                                                            )
                                                           )
                                                         )
-                                                      )
-                                                    ),
-                                                    onTap: () {},
-                                                  )
-                                                ),
-                                                SizedBox(width: 20.w,),
-                                                Material(
-                                                  color: Colors.transparent,
-                                                  child: InkWell(
-                                                    child: Container(
-                                                      child: Glassmorphism(
-                                                        blur: 20,
-                                                        opacity: 0.1,
-                                                        radius: 5.r,
-                                                        child: Container(
-                                                          padding: EdgeInsets.only(top: 10.h,
-                                                            bottom: 10.h,
-                                                            left: 12.w,
-                                                            right: 12.w),
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                            children: [
-                                                              Text(
-                                                                'End DAP',
-                                                                style: TextStyle(
-                                                                  color: Colors.white,
-                                                                  fontSize: 12.sp,
+                                                      ),
+                                                      onTap: () {},
+                                                    )
+                                                  ),
+                                                  SizedBox(width: 20.w,),
+                                                  Material(
+                                                    color: Colors.transparent,
+                                                    child: InkWell(
+                                                      child: Container(
+                                                        child: Glassmorphism(
+                                                          blur: 20,
+                                                          opacity: 0.1,
+                                                          radius: 5.r,
+                                                          child: Container(
+                                                            padding: EdgeInsets.only(top: 10.h,
+                                                              bottom: 10.h,
+                                                              left: 12.w,
+                                                              right: 12.w),
+                                                            child: Row(
+                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                              children: [
+                                                                Text(
+                                                                  'End DAP',
+                                                                  style: TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontSize: 12.sp,
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                            ]
+                                                              ]
+                                                            )
                                                           )
                                                         )
-                                                      )
-                                                    ),
-                                                    onTap: () {},
-                                                  )
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 50.h,),
-                                          ],
+                                                      ),
+                                                      onTap: () {},
+                                                    )
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 50.h,),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),

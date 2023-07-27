@@ -28,7 +28,7 @@ class _Homepage extends State<Homepage> {
           ),
           Positioned.fill(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 30.w),
+              padding: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 20.h),
               color: Colors.transparent,
               child: Column(
                 children: [
@@ -91,7 +91,7 @@ class _Homepage extends State<Homepage> {
                       itemBuilder: (context, index) {
                         GridViewItem? item = gridViewItems[selectedCategory]?[index] as GridViewItem?;
                         return item != null ? Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          padding: EdgeInsets.symmetric(vertical: 5.h),
                           child: ListTile(
                             onTap: () {
                               Navigator.push(
@@ -126,7 +126,6 @@ class _Homepage extends State<Homepage> {
                               child: Container(
                                 padding: const EdgeInsets.all(20),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -315,7 +314,7 @@ class _Homepage extends State<Homepage> {
                         ) : Container();
                       },
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

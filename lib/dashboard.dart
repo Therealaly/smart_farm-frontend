@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:smart_farm/card/ecCard.dart';
 import 'package:smart_farm/card/heaterFanCard.dart';
 import 'package:smart_farm/card/humidityCard.dart';
 import 'package:smart_farm/card/phCard.dart';
 import 'package:smart_farm/card/pumpCard.dart';
-import 'component/glassmorphism.dart';
-import 'models/category.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_farm/card/dateCard.dart';
 import 'package:smart_farm/card/temperatureCard.dart';
@@ -80,7 +77,6 @@ class DashboardState extends State<Dashboard> {
               ),
             ),
           ),
-          // bisa ditambah singlechildscrollview
           SafeArea(
             child: SingleChildScrollView(
               child: Padding(
@@ -89,7 +85,6 @@ class DashboardState extends State<Dashboard> {
                   children: [
                     Row(
                       children: [
-
                         IconButton(
                           onPressed: () {},
                           icon: const Icon(

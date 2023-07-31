@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'component/logo.dart';
 import 'component/glassmorphism.dart';
 
@@ -7,37 +8,39 @@ class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/fruit-background.png"), fit: BoxFit.cover)
-            ),
-          ),
-          SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(left: 30, right: 30),
-              color: Colors.transparent,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    child: logo,
-                  ),
-                  SizedBox(height: 40,),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [card],
-                  ),
-                ],
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/fruit-background.png"), fit: BoxFit.cover)
+        ),
+        child: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(left: 30.w, right: 30.w),
+                color: Colors.transparent,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      child: logo,
+                    ),
+                    SizedBox(height: 40.h,),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        card
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       )
     );
   }
@@ -51,35 +54,36 @@ Widget card = Row(
         opacity: 0.1,
         radius: 15,
         child: Container(
-          //height: 150,
-          padding: const EdgeInsets.all(40),
+          padding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 40.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Welcome to SmartFarm!',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                  SizedBox(height: 40.0,),
+                  SizedBox(height: 40.h,),
                   _emailTF(),
-                  SizedBox(height: 20.0, ),
+                  SizedBox(height: 20.h, ),
                   _passwordTF(),
-                  SizedBox(height: 20,),
+                  SizedBox(height: 20.h,),
                   Container(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
-                      onTap: () {  },
-                      child: const Text(
+                      onTap: () {
+                        //Navigator.pushNamed(context, '/forgot_pwd');
+                      },
+                      child: Text(
                         'Forgot Password?',
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 10.sp,
                           color: Colors.white,
                           fontWeight: FontWeight.w600
                         ),
@@ -88,10 +92,11 @@ Widget card = Row(
                   ),
                 ],
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 20.h,),
               _loginButton(),
+              SizedBox(height: 5.h,),
               _googleSignIn(),
-              SizedBox(height: 20,),
+              SizedBox(height: 20.h,),
               _registerAccount(),
             ]
           )
@@ -104,35 +109,34 @@ Widget card = Row(
 Widget _emailTF() {
   return Column(
     children: [
-      Container(
-        padding: EdgeInsets.only(top:10, bottom: 5),
-        child: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.only(right: 10),
-              child: const Icon(
-                CupertinoIcons.mail,
-                color: Colors.white,
-              ),
+      Row(
+        children: [
+          const Icon(
+            CupertinoIcons.mail,
+            color: Colors.white,
+          ),
+          SizedBox(width: 5.w,),
+          Text(
+            'Email',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 14.sp,
             ),
-            const Text(
-              'Email',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
-      const TextField(
+      TextField(
         keyboardType: TextInputType.emailAddress,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 5),),
-            hintText: "Enter your Email",
-            hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 14)
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 2.w), // Set the borderSide color to white
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white70, width: 2.w), // Set the borderSide color to white
+          ),
+          hintText: "Enter your Email",
+          hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 10.sp)
         ),
       ),
     ],
@@ -142,35 +146,34 @@ Widget _emailTF() {
 Widget _passwordTF() {
   return Column(
     children: [
-      Container(
-        padding: EdgeInsets.only(top:10, bottom: 5),
-        child: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.only(right: 10),
-              child: const Icon(
-                CupertinoIcons.padlock,
-                color: Colors.white,
-              ),
+      Row(
+        children: [
+          const Icon(
+            CupertinoIcons.padlock,
+            color: Colors.white,
+          ),
+          SizedBox(width: 5.w,),
+          Text(
+            'Password',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 14.sp,
             ),
-            const Text(
-              'Password',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
-      const TextField(
+      TextField(
         obscureText: true,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 5),),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.white, width: 2.w), // Set the borderSide color to white
+            ),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.white70, width: 2.w), // Set the borderSide color to white
+            ),
             hintText: "Enter your Password",
-            hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 14)
+            hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 10.sp)
         ),
       ),
     ],
@@ -179,22 +182,21 @@ Widget _passwordTF() {
 
 Widget _googleSignIn() {
   return Container(
-    padding: EdgeInsets.only(top: 10),
     width: double.infinity,
-    height: 60,
+    height: 39.h,
     child: ElevatedButton.icon(
       onPressed: (){},
-      label: const Text(
+      label: Text(
         'Sign in With Google',
         style: TextStyle(
-            fontSize: 16,
+            fontSize: 12.sp,
             color: Colors.black
         ),
       ),
       icon: Image.asset(
         'assets/images/google_logo.png',
-        height: 32,
-        width: 32,
+        height: 20.h,
+        width: 20.w,
       ),
       style: const ButtonStyle(
         backgroundColor: MaterialStatePropertyAll<Color>(Colors.white),
@@ -207,20 +209,20 @@ Widget _registerAccount() {
   return GestureDetector(
     onTap: () {},
     child: RichText(
-        text: const TextSpan(
+        text: TextSpan(
             children: [
               TextSpan(
                   text: 'Don\'t have an account? ',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 14,
+                    fontSize: 10.sp,
                   )
               ),
               TextSpan(
                   text: 'Sign Up',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 14,
+                    fontSize: 10.sp,
                     fontWeight: FontWeight.w700,
                   )
               )
@@ -238,18 +240,19 @@ Widget _loginButton() {
             child: Glassmorphism(
                 blur: 20,
                 opacity: 0.1,
-                radius: 5,
+                radius: 5.r,
                 child: Container(
-                    height: 45,
                     width: double.infinity,
-                    child: const Row(
+                    height: 39.h,
+                    child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min, // test
                         children: [
                           Text(
                             'Login',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),

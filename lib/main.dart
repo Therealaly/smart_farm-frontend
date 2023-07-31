@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_farm/profile.dart';
+import 'package:smart_farm/userManagement.dart';
 import 'component/glassmorphism.dart';
 import 'signIn.dart';
 import 'register.dart';
@@ -25,10 +27,14 @@ class MyApp extends StatelessWidget {
           ),
           home:
           //Register(),
-          //SignIn(),
+          SignIn(),
           //ForgotPwd(),
-          //Dashboard(),
-          Homepage(),
+          //Homepage(),
+          routes: {
+            '/profile': (context) => Profile(),
+            '/user_management': (context) => UserManagement(),
+            '/forgot_pwd': (context) => ForgotPwd(),
+          },
         );
       },
       designSize: Size(390, 844),

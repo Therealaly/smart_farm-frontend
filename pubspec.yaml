@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   intl: ^0.18.1
   flutter_screenutil: ^5.8.4
+  share_plus: ^7.0.2
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +69,8 @@ flutter:
     - assets/images/google_logo.png
     - assets/images/aurora-background.png
     - assets/images/pump_icon.png
+    - assets/images/whatsapp_logo_white.png
+    - assets/images/instagram_logo_white.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

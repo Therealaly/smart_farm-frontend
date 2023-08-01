@@ -1,10 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_farm/component/glassButton.dart';
+import 'package:smart_farm/component/passwordField.dart';
 import 'component/logo.dart';
 import 'component/glassmorphism.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
+  @override
+  State<SignIn> createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +20,7 @@ class SignIn extends StatelessWidget {
         height: double.infinity,
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/fruit-background.png"), fit: BoxFit.cover)
+                image: AssetImage("assets/images/vege-background.png"), fit: BoxFit.cover)
         ),
         child: Stack(
           children: <Widget>[
@@ -28,11 +35,11 @@ class SignIn extends StatelessWidget {
                       width: double.infinity,
                       child: logo,
                     ),
-                    SizedBox(height: 40.h,),
+                    SizedBox(height: 120.h,),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        card
+                        _card(context),
                       ],
                     ),
                   ],
@@ -46,65 +53,75 @@ class SignIn extends StatelessWidget {
   }
 }
 
-Widget card = Row(
-  children: [
-    Expanded(
-      child: Glassmorphism(
-        blur: 20,
-        opacity: 0.1,
-        radius: 15,
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 40.w),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Welcome to SmartFarm!',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  SizedBox(height: 40.h,),
-                  _emailTF(),
-                  SizedBox(height: 20.h, ),
-                  _passwordTF(),
-                  SizedBox(height: 20.h,),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: GestureDetector(
-                      onTap: () {
-                        //Navigator.pushNamed(context, '/forgot_pwd');
-                      },
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          fontSize: 10.sp,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600
-                        ),
+Widget _card(context) {
+  return Row(
+    children: [
+      Expanded(
+        child: Glassmorphism(
+          blur: 20,
+          opacity: 0.1,
+          radius: 15,
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 40.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Welcome to SmartFarm!',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w700,
                       ),
-                    )
-                  ),
-                ],
-              ),
-              SizedBox(height: 20.h,),
-              _loginButton(),
-              SizedBox(height: 5.h,),
-              _googleSignIn(),
-              SizedBox(height: 20.h,),
-              _registerAccount(),
-            ]
+                    ),
+                    SizedBox(height: 40.h,),
+                    _emailTF(),
+                    SizedBox(height: 20.h, ),
+                    PasswordTextField(),
+                    SizedBox(height: 20.h,),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/forgot_pwd');
+                        },
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            fontSize: 10.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600
+                          ),
+                        ),
+                      )
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.h,),
+                GlassButton(
+                  width: double.infinity,
+                  height: 39.h,
+                  text: 'Login',
+                  fontSize: 12.sp,
+                  onTap: () {
+                    Navigator.of(context).pushReplacementNamed('/homepage');
+                  },
+                ),
+                SizedBox(height: 5.h,),
+                _googleSignIn(),
+                SizedBox(height: 20.h,),
+                _registerAccount(context),
+              ]
+            )
           )
         )
       )
-    )
-  ]
-);
+    ]
+  );
+}
 
 Widget _emailTF() {
   return Column(
@@ -143,43 +160,6 @@ Widget _emailTF() {
   );
 }
 
-Widget _passwordTF() {
-  return Column(
-    children: [
-      Row(
-        children: [
-          const Icon(
-            CupertinoIcons.padlock,
-            color: Colors.white,
-          ),
-          SizedBox(width: 5.w,),
-          Text(
-            'Password',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 14.sp,
-            ),
-          )
-        ],
-      ),
-      TextField(
-        obscureText: true,
-        style: TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 2.w), // Set the borderSide color to white
-            ),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white70, width: 2.w), // Set the borderSide color to white
-            ),
-            hintText: "Enter your Password",
-            hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 10.sp)
-        ),
-      ),
-    ],
-  );
-}
-
 Widget _googleSignIn() {
   return Container(
     width: double.infinity,
@@ -205,9 +185,11 @@ Widget _googleSignIn() {
   );
 }
 
-Widget _registerAccount() {
+Widget _registerAccount(context) {
   return GestureDetector(
-    onTap: () {},
+    onTap: () {
+      Navigator.pushNamed(context, '/register');
+    },
     child: RichText(
         text: TextSpan(
             children: [
@@ -229,40 +211,6 @@ Widget _registerAccount() {
             ]
         )
     ),
-  );
-}
-
-Widget _loginButton() {
-  return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        child: Container(
-            child: Glassmorphism(
-                blur: 20,
-                opacity: 0.1,
-                radius: 5.r,
-                child: Container(
-                    width: double.infinity,
-                    height: 39.h,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min, // test
-                        children: [
-                          Text(
-                            'Login',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ]
-                    )
-                )
-            )
-        ),
-        onTap: () {},
-      )
   );
 }
 

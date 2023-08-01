@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_farm/component/glassButton.dart';
 import 'component/logo.dart';
 import 'component/glassmorphism.dart';
 
@@ -7,19 +9,18 @@ class ForgotPwd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/vege-background.png"), fit: BoxFit.cover)
+        ),
+        child: Stack(
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/fruit-background.png"), fit: BoxFit.cover)
-              ),
-            ),
             SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.only(left: 30, right: 30),
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
                 color: Colors.transparent,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,59 +29,68 @@ class ForgotPwd extends StatelessWidget {
                       width: double.infinity,
                       child: logo,
                     ),
-                    //SizedBox(height: 20,),
+                    SizedBox(height: 180.h,),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [_card()],
+                      children: [_card(context)],
                     ),
                   ],
                 ),
               ),
             ),
           ],
-        )
+        ),
+      )
     );
   }
 }
 
-Widget _card() {
+Widget _card(context) {
   return Row(
-      children: [
-        Expanded(
-            child: Glassmorphism(
-                blur: 20,
-                opacity: 0.1,
-                radius: 15,
-                child: Container(
-                  //height: 150,
-                    padding: const EdgeInsets.all(40),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Forgot Password?',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                SizedBox(height: 40.0,),
-                                _emailTF(),
-                              ]
-                          ),
-                          SizedBox(height: 40,),
-                          _verifyButton(),
-                        ]
-                    )
+    children: [
+      Expanded(
+        child: Glassmorphism(
+          blur: 20,
+          opacity: 0.1,
+          radius: 15,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 50.h),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Forget Password?',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(height: 40.h,),
+                    _emailTF(),
+                  ]
+                ),
+                SizedBox(height: 30.h,),
+                GlassButton(
+                  width: double.infinity,
+                  height: 39.h,
+                  text: 'Send Verification Email',
+                  fontSize: 12.sp,
+                  onTap: () {
+                    Navigator.of(context).pushReplacementNamed('/reset_pwd');
+                  },
                 )
+              ]
             )
+          )
         )
-      ]
+      )
+    ]
   );
 }
 
@@ -88,69 +98,37 @@ Widget _emailTF() {
   return Column(
     children: [
       Container(
-        padding: EdgeInsets.only(top:10, bottom: 5),
         child: Row(
           children: [
-            Container(
-              padding: EdgeInsets.only(right: 10),
-              child: const Icon(
-                CupertinoIcons.mail,
-                color: Colors.white,
-              ),
+            const Icon(
+              CupertinoIcons.mail,
+              color: Colors.white,
             ),
-            const Text(
+            SizedBox(width: 5.w,),
+            Text(
               'Email',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 14.sp,
               ),
             )
           ],
         ),
       ),
-      const TextField(
+      TextField(
         keyboardType: TextInputType.emailAddress,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 5),),
-            hintText: "Enter your Email",
-            hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 14)
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 2.w), // Set the borderSide color to white
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white70, width: 2.w), // Set the borderSide color to white
+          ),
+          hintText: "Enter your Email",
+          hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 10.sp)
         ),
       ),
     ],
-  );
-}
-
-Widget _verifyButton() {
-  return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        child: Container(
-            child: Glassmorphism(
-                blur: 20,
-                opacity: 0.1,
-                radius: 5,
-                child: Container(
-                    height: 45,
-                    width: double.infinity,
-                    child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Send Verification Email',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ]
-                    )
-                )
-            )
-        ),
-        onTap: () {},
-      )
   );
 }

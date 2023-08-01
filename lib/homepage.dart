@@ -54,7 +54,7 @@ class _Homepage extends State<Homepage> {
                               } else if (newValue == 'Profile') {
                                 Navigator.pushNamed(context, '/profile');
                               } else if (newValue == 'Sign Out') {
-                                // Add navigation to other pages if needed
+                                Navigator.popAndPushNamed(context, '/signIn');
                               }
                             });
                           },

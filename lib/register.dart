@@ -1,49 +1,68 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_farm/component/glassButton.dart';
 import 'component/logo.dart';
 import 'component/glassmorphism.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController newPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/fruit-background.png"), fit: BoxFit.cover)
-            ),
-          ),
-          SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(left: 30, right: 30),
-              color: Colors.transparent,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    child: logo,
-                  ),
-                  //SizedBox(height: 20,),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [_card()],
-                  ),
-                ],
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/vege-background.png"), fit: BoxFit.cover)
+        ),
+        child: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
+                color: Colors.transparent,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      child: logo,
+                    ),
+                    //SizedBox(height: 20,),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _card(
+                          context,
+                          newPasswordController,
+                          confirmPasswordController,
+                          formKey,
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       )
     );
   }
 }
 
-Widget _card() {
+Widget _card(context, TextEditingController newPasswordController, TextEditingController confirmPasswordController, formKey) {
   return Row(
     children: [
       Expanded(
@@ -73,15 +92,37 @@ Widget _card() {
                   SizedBox(height: 20.0, ),
                   _usernameTF(),
                   SizedBox(height: 20.0, ),
-                  _passwordTF(),
-                  SizedBox(height: 20.0, ),
-                  _confPasswordTF(),
+                  Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        _pwdTF1(newPasswordController),
+                        SizedBox(height: 20.h),
+                        _pwdTF2(confirmPasswordController, newPasswordController),
+                        SizedBox(height: 20.h),
+                        Builder(
+                          builder: (BuildContext context) {
+                            return GlassButton(
+                              width: double.infinity,
+                              height: 39.h,
+                              text: 'Register',
+                              fontSize: 12.sp,
+                              onTap: () {
+                                if (formKey.currentState!.validate()) {
+                                  // Passwords are valid and match, continue with your logic
+                                  Navigator.of(context).pop();
+                                }
+                              },
+                            );
+                          },
+                        )
+                      ],
+                    ),
+                  )
                 ]
                 ),
                 SizedBox(height: 20,),
-                _registerButton(),
-                SizedBox(height: 20,),
-                _haveAccount(),
+                _haveAccount(context),
               ]
             )
           )
@@ -115,14 +156,18 @@ Widget _emailTF() {
           ],
         ),
       ),
-      const TextField(
+      TextField(
         keyboardType: TextInputType.emailAddress,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 5),),
-            hintText: "Enter your Email",
-            hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 14)
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 2.w), // Set the borderSide color to white
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white70, width: 2.w), // Set the borderSide color to white
+          ),
+          hintText: "Enter your email",
+          hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 10.sp),
         ),
       ),
     ],
@@ -153,90 +198,119 @@ Widget _usernameTF() {
           ],
         ),
       ),
-      const TextField(
+      TextField(
         keyboardType: TextInputType.emailAddress,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 5),),
-            hintText: "Enter your Username",
-            hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 14)
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 2.w), // Set the borderSide color to white
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white70, width: 2.w), // Set the borderSide color to white
+          ),
+          hintText: "Enter your username",
+          hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 10.sp),
         ),
       ),
     ],
   );
 }
 
-Widget _passwordTF() {
+Widget _pwdTF1(newPasswordController) {
   return Column(
     children: [
       Container(
-        padding: EdgeInsets.only(top:10, bottom: 5),
         child: Row(
           children: [
-            Container(
-              padding: EdgeInsets.only(right: 10),
-              child: const Icon(
-                CupertinoIcons.padlock,
-                color: Colors.white,
-              ),
+            const Icon(
+              CupertinoIcons.padlock,
+              color: Colors.white,
             ),
-            const Text(
-              'Password',
+            SizedBox(width: 5.w,),
+            Text(
+              'New Password',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 14.sp,
               ),
             )
           ],
         ),
       ),
-      const TextField(
-        obscureText: true,
+      TextFormField(
+        controller: newPasswordController,
+        keyboardType: TextInputType.visiblePassword,
         style: TextStyle(color: Colors.white),
+        obscureText: true,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Password is required';
+          } else if (value.length < 6) {
+            return 'Password must be at least 6 characters';
+          } else if (!RegExp(r'(?=.*[A-Z])(?=.*\d)').hasMatch(value)) {
+            return
+              'Password must contain at least one uppercase letter and one number';
+          }
+          return null;
+        },
         decoration: InputDecoration(
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 5),),
-            hintText: "Enter your Password",
-            hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 14)
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 2.w),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white70, width: 2.w),
+          ),
+          hintText: "Enter your password",
+          hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 10.sp),
         ),
       ),
     ],
   );
 }
 
-Widget _confPasswordTF() {
+Widget _pwdTF2(TextEditingController confirmPasswordController, TextEditingController newPasswordController) {
   return Column(
     children: [
       Container(
-        padding: EdgeInsets.only(top:10, bottom: 5),
         child: Row(
           children: [
-            Container(
-              padding: EdgeInsets.only(right: 10),
-              child: const Icon(
-                CupertinoIcons.padlock,
-                color: Colors.white,
-              ),
+            const Icon(
+              CupertinoIcons.padlock,
+              color: Colors.white,
             ),
-            const Text(
-              'Confirm Password',
+            SizedBox(width: 5.w,),
+            Text(
+              'Confirm New Password',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 14.sp,
               ),
             )
           ],
         ),
       ),
-      const TextField(
-        obscureText: true,
+      TextFormField(
+        controller: confirmPasswordController,
+        keyboardType: TextInputType.visiblePassword,
         style: TextStyle(color: Colors.white),
+        obscureText: true,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Please re-enter your password';
+          } else if (value != newPasswordController.text) {
+            return 'Passwords do not match';
+          }
+          return null;
+        },
         decoration: InputDecoration(
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 5),),
-            hintText: "Repeat your Password",
-            hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 14)
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 2.w),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white70, width: 2.w),
+          ),
+          hintText: "Repeat your password",
+          hintStyle: TextStyle(fontWeight: FontWeight.w200, color: Colors.white, fontSize: 10.sp),
         ),
       ),
     ],
@@ -276,9 +350,11 @@ Widget _registerButton() {
   );
 }
 
-Widget _haveAccount() {
+Widget _haveAccount(context) {
   return GestureDetector(
-    onTap: () {},
+    onTap: () {
+      Navigator.of(context).pop();
+    },
     child: RichText(
         text: const TextSpan(
             children: [

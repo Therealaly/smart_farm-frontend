@@ -71,6 +71,7 @@ flutter:
     - assets/images/pump_icon.png
     - assets/images/whatsapp_logo_white.png
     - assets/images/instagram_logo_white.png
+    - assets/images/vege-background.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

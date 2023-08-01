@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_farm/component/glassButton.dart';
 import '../component/glassmorphism.dart';
 import 'package:smart_farm/component/numberStepper.dart';
 
@@ -174,35 +175,13 @@ class _PhCardState extends State<PhCard> {
                                                 fontWeight: FontWeight.w600,
                                               ),
                                             ),
-                                            Material(
-                                              color: Colors.transparent,
-                                              child: InkWell(
-                                                child: Container(
-                                                  child: Glassmorphism(
-                                                    blur: 20,
-                                                    opacity: 0.1,
-                                                    radius: 5.r,
-                                                    child: Container(
-                                                        width: 60.w,
-                                                        height: 30.h,
-                                                      child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                        children: [
-                                                          Text(
-                                                            'Set',
-                                                            style: TextStyle(
-                                                              color: Colors.white,
-                                                              fontSize: 12.sp,
-                                                            ),
-                                                          ),
-                                                        ]
-                                                      )
-                                                    )
-                                                  )
-                                                ),
-                                                onTap: () {},
-                                              )
-                                            )
+                                            GlassButton(
+                                              width: 60.w,
+                                              height: 30.h,
+                                              text: 'Set',
+                                              fontSize: 12.sp,
+                                              onTap: (){},
+                                            ),
                                           ],
                                         ),
                                         SizedBox(height: 20.h,),

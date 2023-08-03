@@ -328,6 +328,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.7.3"
+  qr_scanner_overlay:
+    dependency: "direct main"
+    description:
+      name: qr_scanner_overlay
+      sha256: b65dc54dd96ca248e5d7e5d3b810e151145facc0190c281dfcfe61a22a5e3eb3
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   share_plus:
     dependency: "direct main"
     description:

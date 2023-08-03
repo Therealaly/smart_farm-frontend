@@ -54,7 +54,7 @@ class _Homepage extends State<Homepage> {
                                     if (newValue == 'User Management') {
                                       Navigator.pushNamed(context, '/user_management');
                                     } else if (newValue == '+ Add Controller') {
-                                      // Add navigation to other pages if needed
+                                      Navigator.pushNamed(context, '/qr_scan');
                                     } else if (newValue == 'Profile') {
                                       Navigator.pushNamed(context, '/profile');
                                     } else if (newValue == 'Sign Out') {

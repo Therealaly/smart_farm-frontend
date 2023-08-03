@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_farm/component/glassButton.dart';
 import 'package:smart_farm/profile.dart';
+import 'package:smart_farm/qrScanner.dart';
 import 'package:smart_farm/resetPwd.dart';
 import 'package:smart_farm/userManagement.dart';
 import 'component/glassmorphism.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
             '/register': (context) => Register(),
             '/homepage': (context) => Homepage(),
             '/signIn': (context) => SignIn(),
+            '/qr_scan': (context) => QrScanner(),
           },
         );
       },

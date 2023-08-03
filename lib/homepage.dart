@@ -25,124 +25,132 @@ class _Homepage extends State<Homepage> {
             image: AssetImage("assets/images/aurora-background.png"), fit: BoxFit.cover)
         ),
         child: Container(
-          padding: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 20.h),
+          padding: EdgeInsets.only(left: 10.w, right: 10.w, bottom: 20.h),
           color: Colors.transparent,
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    alignment:  Alignment.centerLeft,
-                    child: logo,
-                  ),
-                  SizedBox(width: 110.w,),
-                  Expanded(
-                    child: Container(
-                      //width: 110.w,
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: _selectedMenuItem,
-                          onChanged: (String? newValue) {
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          alignment:  Alignment.centerLeft,
+                          child: logo,
+                        ),
+                        SizedBox(width: 50.w,),
+                        Expanded(
+                          child: Container(
+                            //width: 110.w,
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: _selectedMenuItem,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    _selectedMenuItem = newValue;
+                                    // Check the selected value and navigate to the corresponding page
+                                    if (newValue == 'User Management') {
+                                      Navigator.pushNamed(context, '/user_management');
+                                    } else if (newValue == '+ Add Controller') {
+                                      // Add navigation to other pages if needed
+                                    } else if (newValue == 'Profile') {
+                                      Navigator.pushNamed(context, '/profile');
+                                    } else if (newValue == 'Sign Out') {
+                                      Navigator.popAndPushNamed(context, '/signIn');
+                                    }
+                                  });
+                                },
+                                items: [
+                                  DropdownMenuItem(
+                                    value: '+ Add Controller',
+                                    child: Center(child: Text('+ Add Controller')),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'User Management',
+                                    child: Center(child: Text('User Management')),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'Profile',
+                                    child: Center(child: Text('Profile')),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'Sign Out',
+                                    child: Center(child: Text('Sign Out')),
+                                  ),
+                                ],
+                                isExpanded: true,
+                                selectedItemBuilder: (BuildContext context) {
+                                  return [
+                                    // This widget will be displayed instead of the selected text
+                                    Container(),
+                                  ];
+                                },
+                                dropdownColor: Colors.blueGrey[800],
+                                icon: Icon(Icons.menu),
+                                iconEnabledColor: Colors.white,
+                                iconSize: 20.w,
+                                elevation: 16,
+                                style: TextStyle(color: Colors.white),
+                                underline: Container(),
+                                  // If you want to change the dropdown's background color, you can wrap the DropdownButtonHideUnderline with a Container and set its color.
+                                  // In this example, the dropdown's background color is set to grey.
+                                  //child: Container(color: Colors.grey, child: DropdownButtonHideUnderline(...)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'All Controllers',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        DropdownButton<Category>(
+                          dropdownColor: Colors.blueGrey[800],
+                          style: TextStyle(color: Colors.white),
+                          value: selectedCategory,
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.white, // <-- SEE HERE
+                          ),
+                          underline: Container(
+                            height: 1,
+                            color: Colors.white, //<-- SEE HERE
+                          ),
+                          onChanged: (Category? newValue) {
                             setState(() {
-                              _selectedMenuItem = newValue;
-                              // Check the selected value and navigate to the corresponding page
-                              if (newValue == 'User Management') {
-                                Navigator.pushNamed(context, '/user_management');
-                              } else if (newValue == '+ Add Controller') {
-                                // Add navigation to other pages if needed
-                              } else if (newValue == 'Profile') {
-                                Navigator.pushNamed(context, '/profile');
-                              } else if (newValue == 'Sign Out') {
-                                Navigator.popAndPushNamed(context, '/signIn');
-                              }
+                              selectedCategory = newValue;
+                              //print("Selected Category: $selectedCategory"); //development
                             });
                           },
-                          items: [
-                            DropdownMenuItem(
-                              value: '+ Add Controller',
-                              child: Center(child: Text('+ Add Controller')),
-                            ),
-                            DropdownMenuItem(
-                              value: 'User Management',
-                              child: Center(child: Text('User Management')),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Profile',
-                              child: Center(child: Text('Profile')),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Sign Out',
-                              child: Center(child: Text('Sign Out')),
-                            ),
-                          ],
-                          isExpanded: true,
-                          selectedItemBuilder: (BuildContext context) {
-                            return [
-                              // This widget will be displayed instead of the selected text
-                              Container(),
-                            ];
-                          },
-                          dropdownColor: Colors.blueGrey[800],
-                          icon: Icon(Icons.menu),
-                          iconEnabledColor: Colors.white,
-                          iconSize: 20.w,
-                          elevation: 16,
-                          style: TextStyle(color: Colors.white),
-                          underline: Container(),
-                            // If you want to change the dropdown's background color, you can wrap the DropdownButtonHideUnderline with a Container and set its color.
-                            // In this example, the dropdown's background color is set to grey.
-                            //child: Container(color: Colors.grey, child: DropdownButtonHideUnderline(...)),
-                        ),
-                      ),
+                          items: categories.map((Category category) {
+                            return DropdownMenuItem<Category>(
+                              value: category,
+                              child:
+                              Text(
+                                category.name,
+                              ),
+                            );
+                          }).toList(),
+                        )
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'All Controllers',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  DropdownButton<Category>(
-                    dropdownColor: Colors.blueGrey[800],
-                    style: TextStyle(color: Colors.white),
-                    value: selectedCategory,
-                    icon: Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.white, // <-- SEE HERE
-                    ),
-                    underline: Container(
-                      height: 1,
-                      color: Colors.white, //<-- SEE HERE
-                    ),
-                    onChanged: (Category? newValue) {
-                      setState(() {
-                        selectedCategory = newValue;
-                        //print("Selected Category: $selectedCategory"); //development
-                      });
-                    },
-                    items: categories.map((Category category) {
-                      return DropdownMenuItem<Category>(
-                        value: category,
-                        child:
-                        Text(
-                          category.name,
-                        ),
-                      );
-                    }).toList(),
-                  )
-                ],
+                  ],
+                ),
               ),
               SizedBox(height: 10.h,),
               Expanded(
                 child: ListView.builder(
+                  padding: EdgeInsets.zero,
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: gridViewItems[selectedCategory]?.length ?? 0,
@@ -180,8 +188,9 @@ class _Homepage extends State<Homepage> {
                         title: Glassmorphism(
                           blur: 20,
                           opacity: 0.1,
-                          radius: 8,
+                          radius: 8.r,
                           child: Container(
+                            //width: 322.w,
                             padding: const EdgeInsets.all(20),
                             child: Column(
                               children: [
@@ -195,7 +204,7 @@ class _Homepage extends State<Homepage> {
                                           item.title,
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 12.sp,
+                                            fontSize: 14.sp,
                                             fontWeight: FontWeight.w700,
                                           ),
                                         ),
@@ -207,7 +216,7 @@ class _Homepage extends State<Homepage> {
                                               'status: ${item.status}',
                                               style: TextStyle(
                                                 color: CupertinoColors.systemGrey2,
-                                                fontSize: 8.sp,
+                                                fontSize: 10.sp,
                                               ),
                                             ),
                                             SizedBox(width: 5,),
@@ -227,13 +236,13 @@ class _Homepage extends State<Homepage> {
                                           'DAP',
                                           style: TextStyle(
                                             color: CupertinoColors.systemGrey2,
-                                            fontSize: 8.sp,
+                                            fontSize: 10.sp,
                                           ),
                                         ),
                                         Text(
                                           '${item.dap}',
                                           style: TextStyle(
-                                            fontSize: 10.sp,
+                                            fontSize: 12.sp,
                                             fontWeight: FontWeight.w700,
                                             color: Colors.white,
                                           ),
@@ -258,14 +267,14 @@ class _Homepage extends State<Homepage> {
                                         Text(
                                           'EC (2.56)',
                                           style: TextStyle(
-                                            fontSize: 8.sp,
+                                            fontSize: 10.sp,
                                             color: CupertinoColors.systemGrey2,
                                           ),
                                         ),
                                         Text(
                                           item.ec,
                                           style: TextStyle(
-                                            fontSize: 10.sp,
+                                            fontSize: 12.sp,
                                             fontWeight: FontWeight.w700,
                                             color: Colors.white,
                                           ),
@@ -274,14 +283,14 @@ class _Homepage extends State<Homepage> {
                                         Text(
                                           'Water Temp',
                                           style: TextStyle(
-                                            fontSize: 8.sp,
+                                            fontSize: 10.sp,
                                             color: CupertinoColors.systemGrey2,
                                           ),
                                         ),
                                         Text(
                                           '${item.water}°C',
                                           style: TextStyle(
-                                            fontSize: 10.sp,
+                                            fontSize: 12.sp,
                                             fontWeight: FontWeight.w700,
                                             color: Colors.white,
                                           ),
@@ -294,14 +303,14 @@ class _Homepage extends State<Homepage> {
                                         Text(
                                           'pH (5.6 - 7.5)',
                                           style: TextStyle(
-                                            fontSize: 8.sp,
+                                            fontSize: 10.sp,
                                             color: CupertinoColors.systemGrey2,
                                           ),
                                         ),
                                         Text(
                                           item.ph,
                                           style: TextStyle(
-                                            fontSize: 10.sp,
+                                            fontSize: 12.sp,
                                             fontWeight: FontWeight.w700,
                                             color: Colors.white,
                                           ),
@@ -310,14 +319,14 @@ class _Homepage extends State<Homepage> {
                                         Text(
                                           'Air Temp',
                                           style: TextStyle(
-                                            fontSize: 8.sp,
+                                            fontSize: 10.sp,
                                             color: CupertinoColors.systemGrey2,
                                           ),
                                         ),
                                         Text(
                                           '${item.air}°C',
                                           style: TextStyle(
-                                            fontSize: 10.sp,
+                                            fontSize: 12.sp,
                                             fontWeight: FontWeight.w700,
                                             color: Colors.white,
                                           ),
@@ -330,14 +339,14 @@ class _Homepage extends State<Homepage> {
                                         Text(
                                           'Humidty',
                                           style: TextStyle(
-                                            fontSize: 8.sp,
+                                            fontSize: 10.sp,
                                             color: CupertinoColors.systemGrey2,
                                           ),
                                         ),
                                         Text(
                                           '${item.humidity}%',
                                           style: TextStyle(
-                                            fontSize: 10.sp,
+                                            fontSize: 12.sp,
                                             fontWeight: FontWeight.w700,
                                             color: Colors.white,
                                           ),
@@ -346,7 +355,7 @@ class _Homepage extends State<Homepage> {
                                         Text(
                                           'Pump 1',
                                           style: TextStyle(
-                                            fontSize: 8.sp,
+                                            fontSize: 10.sp,
                                             color: CupertinoColors.systemGrey2,
                                           ),
                                         ),
@@ -356,7 +365,7 @@ class _Homepage extends State<Homepage> {
                                             color: (item.aPump == true)
                                                 ? Color.fromRGBO(0, 255, 10, 1)
                                                 : Color.fromRGBO(255, 0, 0, 1),
-                                            fontSize: 10.sp,
+                                            fontSize: 12.sp,
                                             fontWeight: FontWeight.w700,
                                           ),
                                         ),

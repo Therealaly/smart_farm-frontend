@@ -39,6 +39,7 @@ dependencies:
   intl: ^0.18.1
   flutter_screenutil: ^5.8.4
   share_plus: ^7.0.2
+  mobile_scanner: ^3.3.0
 
 dev_dependencies:
   flutter_test:

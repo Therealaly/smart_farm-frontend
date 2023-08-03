@@ -35,7 +35,7 @@ class _SignInState extends State<SignIn> {
                       width: double.infinity,
                       child: logo,
                     ),
-                    SizedBox(height: 120.h,),
+                    SizedBox(height: 110.h,),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -91,7 +91,7 @@ Widget _card(context) {
                         child: Text(
                           'Forgot Password?',
                           style: TextStyle(
-                            fontSize: 10.sp,
+                            fontSize: 12.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.w600
                           ),
@@ -197,14 +197,14 @@ Widget _registerAccount(context) {
                   text: 'Don\'t have an account? ',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 10.sp,
+                    fontSize: 12.sp,
                   )
               ),
               TextSpan(
                   text: 'Sign Up',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 10.sp,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w700,
                   )
               )

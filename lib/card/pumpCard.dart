@@ -67,7 +67,7 @@ class _PumpCardState extends State<PumpCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Duration',
+                    'Dose Time',
                     style: TextStyle(
                       color: CupertinoColors.systemGrey5,
                       fontSize: 11.sp,
@@ -83,7 +83,7 @@ class _PumpCardState extends State<PumpCard> {
                   ),
                   SizedBox(height: 8.h,),
                   Text(
-                    'Checking Period',
+                    'Dose Interval',
                     style: TextStyle(
                       color: CupertinoColors.systemGrey5,
                       fontSize: 11.sp,
@@ -157,7 +157,7 @@ class _PumpCardState extends State<PumpCard> {
                                               width: 123.w,
                                               height: 35.h,
                                               child: Text(
-                                                'Set Duration & Checking Period',
+                                                'Dose Time & Dose Interval',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 14.sp,
@@ -201,7 +201,7 @@ class _PumpCardState extends State<PumpCard> {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              'Duration',
+                                              'Dose Time',
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 12.sp
@@ -261,7 +261,7 @@ class _PumpCardState extends State<PumpCard> {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              'Checking Period',
+                                              'Dose Interval',
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 12.sp

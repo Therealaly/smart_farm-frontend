@@ -38,14 +38,17 @@ class _NumberStepperState extends State<NumberStepper> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        IconButton(onPressed: (){
-          setState(() {
-            if(_currentValue > widget.min){
-              _currentValue -= widget.step;
-            }
-            widget.onChanged (_currentValue);
-          });
-        }, icon: Icon(CupertinoIcons.minus,color: Colors.white,)),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 5.w,),
+          child: IconButton(onPressed: (){
+            setState(() {
+              if(_currentValue > widget.min){
+                _currentValue -= widget.step;
+              }
+              widget.onChanged (_currentValue);
+            });
+          }, icon: Icon(CupertinoIcons.minus,color: Colors.white, size: 15.h,)),
+        ),
         Text(
           _currentValue.toString(),
           style: TextStyle(
@@ -53,14 +56,16 @@ class _NumberStepperState extends State<NumberStepper> {
             fontSize: 14.sp,
           ),
         ),
-        IconButton(onPressed: (){
-          setState(() {
-            if(_currentValue < widget.max){
-              _currentValue += widget.step;
-            }
-            widget.onChanged (_currentValue);
-          });
-        }, icon: Icon(CupertinoIcons.add,color: Colors.white)),
+        Container(
+          child: IconButton(onPressed: (){
+            setState(() {
+              if(_currentValue < widget.max){
+                _currentValue += widget.step;
+              }
+              widget.onChanged (_currentValue);
+            });
+          }, icon: Icon(CupertinoIcons.add,color: Colors.white, size: 15.h,)),
+        ),
       ],
     );
   }

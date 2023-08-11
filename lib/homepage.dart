@@ -40,66 +40,43 @@ class _Homepage extends State<Homepage> {
                           alignment:  Alignment.centerLeft,
                           child: logo,
                         ),
-                        SizedBox(width: 50.w,),
-                        Expanded(
-                          child: Container(
-                            //width: 110.w,
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
-                                value: _selectedMenuItem,
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    _selectedMenuItem = newValue;
-                                    // Check the selected value and navigate to the corresponding page
-                                    if (newValue == 'User Management') {
-                                      Navigator.pushNamed(context, '/user_management');
-                                    } else if (newValue == '+ Add Controller') {
-                                      Navigator.pushNamed(context, '/qr_scan');
-                                    } else if (newValue == 'Profile') {
-                                      Navigator.pushNamed(context, '/profile');
-                                    } else if (newValue == 'Sign Out') {
-                                      Navigator.popAndPushNamed(context, '/signIn');
-                                    }
-                                  });
-                                },
-                                items: [
-                                  DropdownMenuItem(
-                                    value: '+ Add Controller',
-                                    child: Center(child: Text('+ Add Controller')),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 'User Management',
-                                    child: Center(child: Text('User Management')),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 'Profile',
-                                    child: Center(child: Text('Profile')),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 'Sign Out',
-                                    child: Center(child: Text('Sign Out')),
-                                  ),
-                                ],
-                                isExpanded: true,
-                                selectedItemBuilder: (BuildContext context) {
-                                  return [
-                                    // This widget will be displayed instead of the selected text
-                                    Container(),
-                                  ];
-                                },
-                                dropdownColor: Colors.blueGrey[800],
-                                icon: Icon(Icons.menu),
-                                iconEnabledColor: Colors.white,
-                                iconSize: 20.w,
-                                elevation: 16,
-                                style: TextStyle(color: Colors.white),
-                                underline: Container(),
-                                  // If you want to change the dropdown's background color, you can wrap the DropdownButtonHideUnderline with a Container and set its color.
-                                  // In this example, the dropdown's background color is set to grey.
-                                  //child: Container(color: Colors.grey, child: DropdownButtonHideUnderline(...)),
+                        PopupMenuButton<String>(
+                          icon: Icon(Icons.menu, color: Colors.white),
+                          itemBuilder: (BuildContext context) {
+                            return [
+                              PopupMenuItem(
+                                value: '+ Add Controller',
+                                child: Text('+ Add Controller'),
                               ),
-                            ),
-                          ),
+                              PopupMenuItem(
+                                value: 'User Management',
+                                child: Text('User Management'),
+                              ),
+                              PopupMenuItem(
+                                value: 'Profile',
+                                child: Text('Profile'),
+                              ),
+                              PopupMenuItem(
+                                value: 'Sign Out',
+                                child: Text('Sign Out'),
+                              ),
+                            ];
+                          },
+                          onSelected: (String? newValue) {
+                            setState(() {
+                              _selectedMenuItem = newValue;
+                              // Check the selected value and navigate to the corresponding page
+                              if (newValue == 'User Management') {
+                                Navigator.pushNamed(context, '/user_management');
+                              } else if (newValue == '+ Add Controller') {
+                                Navigator.pushNamed(context, '/qr_scan');
+                              } else if (newValue == 'Profile') {
+                                Navigator.pushNamed(context, '/profile');
+                              } else if (newValue == 'Sign Out') {
+                                Navigator.popAndPushNamed(context, '/signIn');
+                              }
+                            });
+                          },
                         ),
                       ],
                     ),
@@ -120,11 +97,11 @@ class _Homepage extends State<Homepage> {
                           value: selectedCategory,
                           icon: Icon(
                             Icons.arrow_drop_down,
-                            color: Colors.white, // <-- SEE HERE
+                            color: Colors.white,
                           ),
                           underline: Container(
                             height: 1,
-                            color: Colors.white, //<-- SEE HERE
+                            color: Colors.white,
                           ),
                           onChanged: (Category? newValue) {
                             setState(() {
@@ -220,10 +197,13 @@ class _Homepage extends State<Homepage> {
                                               ),
                                             ),
                                             SizedBox(width: 5,),
-                                            Icon(
-                                              size: 8.w,
-                                              CupertinoIcons.circle_fill,
-                                              color: (item.status == 'active') ? Color.fromRGBO(0, 255, 10, 1) : Color.fromRGBO(255, 0, 0, 1),
+                                            Container(
+                                              padding: EdgeInsets.symmetric(vertical: 3.h),
+                                              child: Icon(
+                                                size: 8.w,
+                                                CupertinoIcons.circle_fill,
+                                                color: (item.status == 'active') ? Color.fromRGBO(0, 255, 10, 1) : Color.fromRGBO(255, 0, 0, 1),
+                                              ),
                                             ),
                                           ],
                                         )
